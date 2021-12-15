@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_task/views/home_page.dart';
+import 'package:flutter_task/views/profile_setup.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -13,6 +16,9 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final _phoneController = TextEditingController();
+
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  CollectionReference users = FirebaseFirestore.instance.collection('Users');
 
   void loginUser(String phoneNo) async {
     FirebaseAuth auth = FirebaseAuth.instance;
@@ -54,11 +60,30 @@ class _LoginViewState extends State<LoginView> {
 
                   await auth.signInWithCredential(credential);
                   print("user verified via otp");
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ));
+
+                  var userRef = FirebaseFirestore.instance
+                      .collection('users')
+                      .where('phone', isEqualTo: phoneNo)
+                      .get()
+                      .then((QuerySnapshot<Map<String, dynamic>> doc) => {
+                            //if (doc.docs.first.exists)
+                            if (doc.docs.isEmpty)
+                              {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const ProfilePage(),
+                                    )),
+                              }
+                            else
+                              {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const HomePage(),
+                                    )),
+                              }
+                          });
                 },
               ),
             );
@@ -71,24 +96,38 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Column(
-          children: [
-            Center(
-              child: TextField(
-                controller: _phoneController,
-              ),
+    return Center(
+      child: Column(
+        children: [
+          Center(
+            child: TextField(
+              controller: _phoneController,
             ),
-            ElevatedButton(
-              onPressed: () {
-                loginUser(_phoneController.text);
-              },
-              child: const Text('Done'),
-            ),
-          ],
-        ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              loginUser(_phoneController.text);
+            },
+            child: const Text('Done'),
+          ),
+        ],
       ),
     );
   }
 }
+
+
+
+                   //      if (querySnapshot.docs.first.exists) {
+                    //   Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => const HomePage(),
+                    //       ));
+                    // } else{
+                    //   Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => const ProfilePage(),
+                    //       ));
+                    // }
