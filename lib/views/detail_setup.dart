@@ -28,7 +28,10 @@ class _DetailSetupState extends State<DetailSetup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("Complete setup")),
+        appBar: AppBar(
+          title: const Text("Complete setup"),
+          automaticallyImplyLeading: false,
+          ),
         body: Column(
           children: [
             const Text("Phone no"),

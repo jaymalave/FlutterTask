@@ -45,6 +45,7 @@ class _LoginViewState extends State<LoginView> {
           barrierDismissible: false,
           builder: (context) {
             return Scaffold(
+              appBar: AppBar(title: const Text("Enter OTP")),
               body: OTPTextField(
                 length: 6,
                 width: MediaQuery.of(context).size.width * 0.90,
@@ -96,21 +97,24 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Center(
-            child: TextField(
-              controller: _phoneController,
+    return Scaffold(
+      appBar: AppBar(title: const Text("Login with OTP")),
+      body: Center(
+        child: Column(
+          children: [
+            Center(
+              child: TextField(
+                controller: _phoneController,
+              ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              loginUser(_phoneController.text);
-            },
-            child: const Text('Done'),
-          ),
-        ],
+            ElevatedButton(
+              onPressed: () {
+                loginUser(_phoneController.text);
+              },
+              child: const Text('Done'),
+            ),
+          ],
+        ),
       ),
     );
   }
