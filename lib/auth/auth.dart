@@ -61,7 +61,7 @@ class _LoginViewState extends State<LoginView> {
                   await auth.signInWithCredential(credential);
                   print("user verified via otp");
 
-                  var userRef = FirebaseFirestore.instance
+                    FirebaseFirestore.instance
                       .collection('users')
                       .where('phone', isEqualTo: phoneNo)
                       .get()
@@ -116,18 +116,3 @@ class _LoginViewState extends State<LoginView> {
   }
 }
 
-
-
-                   //      if (querySnapshot.docs.first.exists) {
-                    //   Navigator.push(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //         builder: (context) => const HomePage(),
-                    //       ));
-                    // } else{
-                    //   Navigator.push(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //         builder: (context) => const ProfilePage(),
-                    //       ));
-                    // }
