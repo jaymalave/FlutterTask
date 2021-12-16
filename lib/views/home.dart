@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_task/utils/colors.dart';
+import 'package:anim_search_bar/anim_search_bar.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -8,33 +10,59 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  static const Map<int, String> carsData = {
-    0: 'Mercedes',
-    1: 'Lamborghini',
-    2: 'McLaren',
-    3: 'Bentley',
-    4: 'Audi',
-    5: 'BMW',
-    6: 'Jaguar',
-    7: 'RollsRoyce',
-    8: 'Porsche',
+  static const Map<String, String> carsDataMap = {
+    '0': 'Mercedes',
+    '1': 'Lamborghini',
+    '2': 'McLaren',
+    '3': 'Bentley',
+    '4': 'Audi',
+    '5': 'BMW',
+    '6': 'Jaguar',
+    '7': 'RollsRoyce',
+    '8': 'Porsche',
   };
 
+  Map<String, String> carsData = Map.from(carsDataMap);
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Column(
-
         children: [
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Center(child: Text('This is the home page')),
+          Container(
+            margin: const EdgeInsets.all(10),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: TextField(
+                onSubmitted: (textFieldValue) {
+                  textFieldValue.isEmpty
+                      ? carsData = carsDataMap
+                      : carsData.containsValue(textFieldValue)
+                          ? carsData.removeWhere(
+                              (key, value) => value != textFieldValue)
+                          : carsData = {};
+                  setState(() {});
+                },
+                style: const TextStyle(
+                  fontSize: 15.0,
+                  color: Colors.black,
+                ),
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  prefixIcon: const Icon(Icons.search),
+                  hintText: "Search a Car",
+                  border: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.white70, width: 1.0),
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                ),
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GridView.builder(
-              physics: const ScrollPhysics(),
+                physics: const ScrollPhysics(),
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -61,7 +89,7 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                     decoration: BoxDecoration(
-                        color: Colors.amber,
+                        color: AppPallete.primary,
                         borderRadius: BorderRadius.circular(15)),
                   );
                 }),
