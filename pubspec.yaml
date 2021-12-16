@@ -65,6 +65,16 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/images/Mercedes.png
+    - assets/images/Bentley.png
+    - assets/images/McLaren.png
+    - assets/images/Lamborghini.png
+    - assets/images/Audi.png
+    - assets/images/BMW.png
+    - assets/images/Porsche.png
+    - assets/images/Jaguar.png
+    - assets/images/RollsRoyce.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
