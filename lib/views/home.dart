@@ -13,7 +13,10 @@ class _HomeState extends State<Home> {
     return Container(
       child: Column(
         children: const [
-           Center(child: Text('Hello world')),
+           Padding(
+             padding: EdgeInsets.all(8.0),
+             child: Center(child: Text('This is the home page')),
+           ),
         ],
       ),
     );

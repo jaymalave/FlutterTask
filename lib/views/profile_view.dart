@@ -19,11 +19,6 @@ class _ProfileViewState extends State<ProfileView> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text(Constants.profileHead),
-          automaticallyImplyLeading: false,
-          backgroundColor: AppPallete.primary,
-        ),
         body: Column(
           children: [
             const Center(child: Text(Constants.profileHead)),

@@ -49,7 +49,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        backgroundColor: AppPallete.bgColor,
         body: tabs[_currentIndex],
         appBar: AppBar(centerTitle: true, title: const Text("Flutter Task App")),
       ),

@@ -55,57 +55,68 @@ class _LoginViewState extends State<LoginView> {
                 appBar: AppBar(
                   title: const Text(Constants.enterOtp),
                   backgroundColor: AppPallete.primary,
-                  ),
-                body: OTPTextField(
-                  length: 6,
-                  width: MediaQuery.of(context).size.width * 0.90,
-                  fieldWidth: 50,
-                  style: const TextStyle(fontSize: 17),
-                  textFieldAlignment: MainAxisAlignment.spaceEvenly,
-                  fieldStyle: FieldStyle.underline,
-                  onCompleted: (pin) async {
-                    String smsCode = pin;
-            
-                    PhoneAuthCredential credential = PhoneAuthProvider.credential(
-                        verificationId: verificationId, smsCode: smsCode);
-            
-                    await auth.signInWithCredential(credential);
-                    print("user verified via otp");
-                    userDataController.setPhone(phoneNo);
-                    Map<String, dynamic> data;
-                    FirebaseFirestore.instance
-                        .collection('users')
-                        .where('phone', isEqualTo: phoneNo)
-                        .get()
-                        .then((QuerySnapshot<Map<String, dynamic>> doc) => {
-                              //if (doc.docs.first.exists)
-                              if (doc.docs.isEmpty)
-                                {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const ProfilePage(),
-                                      )),
-                                }
-                              else
-                                {
-                                  data = doc.docs.first.data(),
-                                  print(data['username'] + data['name'] + data['phone']),
-                                  userDataController.setName(data['name']),
-                                  userDataController.setUsername(data['username']),
-                                  userDataController.setPhone(data['phone']),
-                                  userDataController.setBio(data['bio']),
-                                  userDataController.setDpLink(data['dp']),
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const HomePage(),
-                                      )),
-                                }
-                            });
-                  },
                 ),
-              ),
+                body: SizedBox(
+                  width: MediaQuery.of(context).size.width * 1,
+                  height: MediaQuery.of(context).size.height * 0.75,
+                    child: OTPTextField(
+                      length: 6,
+                      fieldWidth: 50,
+                      style: const TextStyle(fontSize: 17),
+                      textFieldAlignment: MainAxisAlignment.spaceEvenly,
+                      fieldStyle: FieldStyle.underline,
+                      onCompleted: (pin) async {
+                        String smsCode = pin;
+
+                        PhoneAuthCredential credential =
+                            PhoneAuthProvider.credential(
+                                verificationId: verificationId,
+                                smsCode: smsCode);
+
+                        await auth.signInWithCredential(credential);
+                        print("user verified via otp");
+                        userDataController.setPhone(phoneNo);
+                        Map<String, dynamic> data;
+                        FirebaseFirestore.instance
+                            .collection('users')
+                            .where('phone', isEqualTo: phoneNo)
+                            .get()
+                            .then((QuerySnapshot<Map<String, dynamic>> doc) => {
+                                  //if (doc.docs.first.exists)
+                                  if (doc.docs.isEmpty)
+                                    {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ProfilePage(),
+                                          )),
+                                    }
+                                  else
+                                    {
+                                      data = doc.docs.first.data(),
+                                      print(data['username'] +
+                                          data['name'] +
+                                          data['phone']),
+                                      userDataController.setName(data['name']),
+                                      userDataController
+                                          .setUsername(data['username']),
+                                      userDataController
+                                          .setPhone(data['phone']),
+                                      userDataController.setBio(data['bio']),
+                                      userDataController.setDpLink(data['dp']),
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const HomePage(),
+                                          )),
+                                    }
+                                });
+                      },
+                    ),
+                  ),
+                ),
             );
           },
         );
@@ -120,19 +131,25 @@ class _LoginViewState extends State<LoginView> {
       onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
-          title:  const Text(Constants.loginWithOtp),
+          title: const Text(Constants.loginWithOtp),
           automaticallyImplyLeading: false,
           backgroundColor: AppPallete.primary,
-          ),
+        ),
         body: Center(
           child: Column(
             children: [
-              const Center(
-                child: Text(Constants.enterNumber),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(Constants.enterNumber),
+                ),
               ),
-              Center(
-                child: TextField(
-                  controller: _phoneController,
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.75,
+                child: Center(
+                  child: TextField(
+                    controller: _phoneController,
+                  ),
                 ),
               ),
               ElevatedButton(

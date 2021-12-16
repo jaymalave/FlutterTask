@@ -21,7 +21,10 @@ class _EditProfileState extends State<EditProfile> {
     return Container(
       child: Column(
         children: [
-          Row(
+          const SizedBox(
+            height: 20,
+          ),
+          Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(userDataController.name),
@@ -32,16 +35,21 @@ class _EditProfileState extends State<EditProfile> {
                       builder: (context) => Scaffold(
                             body: Column(
                               children: [
-                                TextField(
-                                  controller: _updateNameController,
+                                Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: TextField(
+                                    controller: _updateNameController,
+                                  ),
                                 ),
                                 ElevatedButton(
-                                    onPressed: () {
-                                      editdataController
-                                          .editName(_updateNameController.text);
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text("Update name"),),
+                                  onPressed: () {
+                                    editdataController
+                                        .editName(_updateNameController.text);
+                                    Navigator.pop(context);
+                                    setState(() {});
+                                  },
+                                  child: const Text("Update name"),
+                                ),
                               ],
                             ),
                           ));
@@ -50,10 +58,13 @@ class _EditProfileState extends State<EditProfile> {
               ),
             ],
           ),
-          Row(
+          Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text(userDataController.bio),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(userDataController.bio),
+              ),
               ElevatedButton(
                 onPressed: () {
                   showDialog(
@@ -65,12 +76,14 @@ class _EditProfileState extends State<EditProfile> {
                                   controller: _updateBioController,
                                 ),
                                 ElevatedButton(
-                                    onPressed: () {
-                                      editdataController
-                                          .editBio(_updateBioController.text);
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text("Update Bio"),),
+                                  onPressed: () {
+                                    editdataController
+                                        .editBio(_updateBioController.text);
+                                    Navigator.pop(context);
+                                    setState(() {});
+                                  },
+                                  child: const Text("Update Bio"),
+                                ),
                               ],
                             ),
                           ));
@@ -82,7 +95,10 @@ class _EditProfileState extends State<EditProfile> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(userDataController.dp),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(userDataController.dp),
+              ),
               ElevatedButton(
                 onPressed: () {
                   showDialog(
@@ -94,12 +110,14 @@ class _EditProfileState extends State<EditProfile> {
                                   controller: _updateDpController,
                                 ),
                                 ElevatedButton(
-                                    onPressed: () {
-                                      editdataController
-                                          .editBio(_updateDpController.text);
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text("Update Dp"),),
+                                  onPressed: () {
+                                    editdataController
+                                        .editDp(_updateDpController.text);
+                                    Navigator.pop(context);
+                                    setState(() {});
+                                  },
+                                  child: const Text("Update Dp"),
+                                ),
                               ],
                             ),
                           ));
