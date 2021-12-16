@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_task/controllers/userdata_controller.dart';
+import 'package:flutter_task/utils/colors.dart';
+import 'package:flutter_task/utils/constants.dart';
 import 'package:flutter_task/views/detail_setup.dart';
 import 'package:flutter_task/views/home_page.dart';
 import 'package:get/get.dart';
@@ -16,14 +18,15 @@ class _ProfilePageState extends State<ProfilePage> {
   final _usernameController = TextEditingController();
   final userDataController = Get.put(UserDataController());
 
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
         appBar: AppBar(
-          title: const Text("Profile setup"),
-          
-          ),
+          title: const Text(Constants.profileSetup),
+          backgroundColor: AppPallete.primary,
+        ),
         body: Column(
           children: [
             TextField(
@@ -39,7 +42,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             //if (doc.docs.first.exists)
                             if (doc.docs.isEmpty)
                               {
-                                userDataController.setUsername(_usernameController.text),
+                                userDataController
+                                    .setUsername(_usernameController.text),
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -48,12 +52,14 @@ class _ProfilePageState extends State<ProfilePage> {
                               }
                             else
                               {
-                                print("username is taken!"),
+                                print(Constants.usernameTaken),
                               }
                           });
                 },
-                child: const Text("Register")),
+                child: const Text(Constants.checkIfAvailable)),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

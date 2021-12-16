@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_task/controllers/userdata_controller.dart';
+import 'package:flutter_task/utils/colors.dart';
+import 'package:flutter_task/utils/constants.dart';
 import 'package:flutter_task/views/home_page.dart';
 import 'package:flutter_task/views/profile_setup.dart';
 import 'package:get/get.dart';
@@ -48,7 +50,10 @@ class _LoginViewState extends State<LoginView> {
           barrierDismissible: false,
           builder: (context) {
             return Scaffold(
-              appBar: AppBar(title: const Text("Enter OTP")),
+              appBar: AppBar(
+                title: const Text(Constants.enterOtp),
+                backgroundColor: AppPallete.primary,
+                ),
               body: OTPTextField(
                 length: 6,
                 width: MediaQuery.of(context).size.width * 0.90,
@@ -100,23 +105,33 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Login with OTP")),
-      body: Center(
-        child: Column(
-          children: [
-            Center(
-              child: TextField(
-                controller: _phoneController,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: AppBar(
+          title:  const Text(Constants.loginWithOtp),
+          automaticallyImplyLeading: false,
+          backgroundColor: AppPallete.primary,
+          ),
+        body: Center(
+          child: Column(
+            children: [
+              const Center(
+                child: Text(Constants.enterNumber),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                loginUser(_phoneController.text);
-              },
-              child: const Text('Done'),
-            ),
-          ],
+              Center(
+                child: TextField(
+                  controller: _phoneController,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  loginUser(_phoneController.text);
+                },
+                child: const Text('Done'),
+              ),
+            ],
+          ),
         ),
       ),
     );
