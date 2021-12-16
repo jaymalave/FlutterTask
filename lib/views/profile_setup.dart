@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_task/controllers/userdata_controller.dart';
 import 'package:flutter_task/views/detail_setup.dart';
 import 'package:flutter_task/views/home_page.dart';
+import 'package:get/get.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -12,6 +14,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final _usernameController = TextEditingController();
+  final userDataController = Get.put(UserDataController());
 
 
   @override
@@ -36,6 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             //if (doc.docs.first.exists)
                             if (doc.docs.isEmpty)
                               {
+                                userDataController.setUsername(_usernameController.text),
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

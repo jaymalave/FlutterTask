@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_task/controllers/userdata_controller.dart';
 import 'package:flutter_task/views/home_page.dart';
+import 'package:get/get.dart';
 
 class DetailSetup extends StatefulWidget {
   const DetailSetup({Key? key}) : super(key: key);
@@ -11,11 +13,11 @@ class DetailSetup extends StatefulWidget {
 }
 
 class _DetailSetupState extends State<DetailSetup> {
-  final _phoneController = TextEditingController();
   final _nameController = TextEditingController();
   final _bioController = TextEditingController();
   final _dpController = TextEditingController();
-  final _usernameController = TextEditingController();
+  final userDataController = Get.put(UserDataController());
+
   var userToken;
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   @override
@@ -31,13 +33,9 @@ class _DetailSetupState extends State<DetailSetup> {
         appBar: AppBar(
           title: const Text("Complete setup"),
           automaticallyImplyLeading: false,
-          ),
+        ),
         body: Column(
           children: [
-            const Text("Phone no"),
-            TextField(
-              controller: _phoneController,
-            ),
             const SizedBox(
               height: 10,
             ),
@@ -62,10 +60,6 @@ class _DetailSetupState extends State<DetailSetup> {
             const SizedBox(
               height: 10,
             ),
-            const Text("username"),
-            TextField(
-              controller: _usernameController,
-            ),
             ElevatedButton(
               onPressed: () {
                 users
@@ -73,8 +67,8 @@ class _DetailSetupState extends State<DetailSetup> {
                       'bio': _bioController.text,
                       'name': _nameController.text,
                       'dp': _dpController.text,
-                      'phone': _phoneController.text,
-                      'username': _usernameController.text,
+                      'phone': userDataController.phone,
+                      'username': userDataController.username,
                       'userToken': userToken, // 42
                     })
                     .then((value) => {
@@ -86,6 +80,11 @@ class _DetailSetupState extends State<DetailSetup> {
                               )),
                         })
                     .catchError((error) => print("Failed to add user: $error"));
+                userDataController.setBio(_bioController.text);
+                userDataController.setDpLink(_dpController.text);
+                userDataController.setName(_nameController.text);
+                
+
               },
               child: const Text("Sign up"),
             )

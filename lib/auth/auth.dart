@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_task/controllers/userdata_controller.dart';
 import 'package:flutter_task/views/home_page.dart';
 import 'package:flutter_task/views/profile_setup.dart';
+import 'package:get/get.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,6 +21,7 @@ class _LoginViewState extends State<LoginView> {
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   CollectionReference users = FirebaseFirestore.instance.collection('Users');
+  final userDataController = Get.put(UserDataController());
 
   void loginUser(String phoneNo) async {
     FirebaseAuth auth = FirebaseAuth.instance;
@@ -61,8 +64,8 @@ class _LoginViewState extends State<LoginView> {
 
                   await auth.signInWithCredential(credential);
                   print("user verified via otp");
-
-                    FirebaseFirestore.instance
+                  userDataController.setPhone(phoneNo);
+                  FirebaseFirestore.instance
                       .collection('users')
                       .where('phone', isEqualTo: phoneNo)
                       .get()
@@ -119,4 +122,3 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 }
-
