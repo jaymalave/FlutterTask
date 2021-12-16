@@ -67,8 +67,8 @@ class _DetailSetupState extends State<DetailSetup> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  users
-                      .add({
+                  users.doc(userDataController.username)
+                      .set({
                         'bio': _bioController.text,
                         'name': _nameController.text,
                         'dp': _dpController.text,

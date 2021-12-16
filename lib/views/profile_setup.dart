@@ -45,10 +45,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                 userDataController
                                     .setUsername(_usernameController.text),
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const DetailSetup(),
-                                    )),
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const DetailSetup(),
+                                  ),
+                                ),
                               }
                             else
                               {

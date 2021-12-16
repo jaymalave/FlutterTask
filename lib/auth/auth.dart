@@ -49,51 +49,62 @@ class _LoginViewState extends State<LoginView> {
           context: context,
           barrierDismissible: false,
           builder: (context) {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text(Constants.enterOtp),
-                backgroundColor: AppPallete.primary,
+            return WillPopScope(
+              onWillPop: () async => false,
+              child: Scaffold(
+                appBar: AppBar(
+                  title: const Text(Constants.enterOtp),
+                  backgroundColor: AppPallete.primary,
+                  ),
+                body: OTPTextField(
+                  length: 6,
+                  width: MediaQuery.of(context).size.width * 0.90,
+                  fieldWidth: 50,
+                  style: const TextStyle(fontSize: 17),
+                  textFieldAlignment: MainAxisAlignment.spaceEvenly,
+                  fieldStyle: FieldStyle.underline,
+                  onCompleted: (pin) async {
+                    String smsCode = pin;
+            
+                    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+                        verificationId: verificationId, smsCode: smsCode);
+            
+                    await auth.signInWithCredential(credential);
+                    print("user verified via otp");
+                    userDataController.setPhone(phoneNo);
+                    Map<String, dynamic> data;
+                    FirebaseFirestore.instance
+                        .collection('users')
+                        .where('phone', isEqualTo: phoneNo)
+                        .get()
+                        .then((QuerySnapshot<Map<String, dynamic>> doc) => {
+                              //if (doc.docs.first.exists)
+                              if (doc.docs.isEmpty)
+                                {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const ProfilePage(),
+                                      )),
+                                }
+                              else
+                                {
+                                  data = doc.docs.first.data(),
+                                  print(data['username'] + data['name'] + data['phone']),
+                                  userDataController.setName(data['name']),
+                                  userDataController.setUsername(data['username']),
+                                  userDataController.setPhone(data['phone']),
+                                  userDataController.setBio(data['bio']),
+                                  userDataController.setDpLink(data['dp']),
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const HomePage(),
+                                      )),
+                                }
+                            });
+                  },
                 ),
-              body: OTPTextField(
-                length: 6,
-                width: MediaQuery.of(context).size.width * 0.90,
-                fieldWidth: 50,
-                style: const TextStyle(fontSize: 17),
-                textFieldAlignment: MainAxisAlignment.spaceEvenly,
-                fieldStyle: FieldStyle.underline,
-                onCompleted: (pin) async {
-                  String smsCode = pin;
-
-                  PhoneAuthCredential credential = PhoneAuthProvider.credential(
-                      verificationId: verificationId, smsCode: smsCode);
-
-                  await auth.signInWithCredential(credential);
-                  print("user verified via otp");
-                  userDataController.setPhone(phoneNo);
-                  FirebaseFirestore.instance
-                      .collection('users')
-                      .where('phone', isEqualTo: phoneNo)
-                      .get()
-                      .then((QuerySnapshot<Map<String, dynamic>> doc) => {
-                            //if (doc.docs.first.exists)
-                            if (doc.docs.isEmpty)
-                              {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const ProfilePage(),
-                                    )),
-                              }
-                            else
-                              {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const HomePage(),
-                                    )),
-                              }
-                          });
-                },
               ),
             );
           },
