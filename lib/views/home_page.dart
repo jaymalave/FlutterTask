@@ -28,7 +28,9 @@ class _HomePageState extends State<HomePage> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        backgroundColor: AppPallete.bgColor,
         bottomNavigationBar: FlashyTabBar(
+          backgroundColor: AppPallete.color[900],
           selectedIndex: _currentIndex,
           showElevation: true,
           onItemSelected: (index) => setState(() {
@@ -36,21 +38,26 @@ class _HomePageState extends State<HomePage> {
           }),
           items: [
             FlashyTabBarItem(
-              icon: const Icon(Icons.home_filled),
-              title: const Text('Home'),
+              icon: const Icon(Icons.home_filled, color: AppPallete.textLight,),
+              title: const Text('Home', style: TextStyle(color: AppPallete.textLight)),
             ),
             FlashyTabBarItem(
-              icon: const Icon(Icons.edit_outlined),
-              title: const Text('Edit Profile'),
+              icon: const Icon(Icons.edit_outlined, color: AppPallete.textLight,),
+              title: const Text('Edit Profile', style: TextStyle(color: AppPallete.textLight)),
             ),
             FlashyTabBarItem(
-              icon: const Icon(Icons.account_circle_rounded),
-              title: const Text('Profile'),
+              icon: const Icon(Icons.account_circle, color: AppPallete.textLight,),
+              title: const Text('Profile', style: TextStyle(color: AppPallete.textLight)),
             ),
+          
           ],
         ),
         body: tabs[_currentIndex],
-        appBar: AppBar(centerTitle: true, title: const Text("Flutter Task App")),
+        appBar: AppBar(
+          centerTitle: true, 
+          title: const Text("Flutter Task App"),
+          automaticallyImplyLeading: false,
+          ),
       ),
     );
   }

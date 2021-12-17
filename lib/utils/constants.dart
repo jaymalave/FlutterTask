@@ -11,4 +11,5 @@ class Constants {
   static const formProfile = 'Profile Picture Link';
   static const formBio = 'Tell us about yourself';
   static const profileHead = 'Profile Page';
+  static const editProfileHead = 'Edit Profile';
 }

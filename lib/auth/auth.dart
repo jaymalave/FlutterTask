@@ -54,7 +54,7 @@ class _LoginViewState extends State<LoginView> {
               child: Scaffold(
                 appBar: AppBar(
                   title: const Text(Constants.enterOtp),
-                  backgroundColor: AppPallete.primary,
+                  backgroundColor: AppPallete.color[900],
                 ),
                 body: SizedBox(
                   width: MediaQuery.of(context).size.width * 1,
@@ -133,7 +133,7 @@ class _LoginViewState extends State<LoginView> {
         appBar: AppBar(
           title: const Text(Constants.loginWithOtp),
           automaticallyImplyLeading: false,
-          backgroundColor: AppPallete.primary,
+          backgroundColor: AppPallete.color[900],
         ),
         body: Center(
           child: Column(

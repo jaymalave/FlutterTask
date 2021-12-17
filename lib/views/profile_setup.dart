@@ -25,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(Constants.profileSetup),
-          backgroundColor: AppPallete.primary,
+          backgroundColor: AppPallete.color[900],
         ),
         body: Column(
           children: [

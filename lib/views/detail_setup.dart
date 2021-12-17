@@ -5,6 +5,7 @@ import 'package:flutter_task/controllers/userdata_controller.dart';
 import 'package:flutter_task/utils/colors.dart';
 import 'package:flutter_task/utils/constants.dart';
 import 'package:flutter_task/views/home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 
 class DetailSetup extends StatefulWidget {
@@ -19,7 +20,7 @@ class _DetailSetupState extends State<DetailSetup> {
   final _bioController = TextEditingController();
   final _dpController = TextEditingController();
   final userDataController = Get.put(UserDataController());
-
+  late SharedPreferences sharedPref;
   var userToken;
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   @override
@@ -36,7 +37,7 @@ class _DetailSetupState extends State<DetailSetup> {
       child: Scaffold(
           appBar: AppBar(
             title: const Text(Constants.profileSetup),
-            backgroundColor: AppPallete.primary,
+            backgroundColor: AppPallete.color[900],
             automaticallyImplyLeading: false,
           ),
           body: Column(
@@ -67,7 +68,8 @@ class _DetailSetupState extends State<DetailSetup> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  users.doc(userDataController.username)
+                  users
+                      .doc(userDataController.username)
                       .set({
                         'bio': _bioController.text,
                         'name': _nameController.text,
@@ -84,7 +86,8 @@ class _DetailSetupState extends State<DetailSetup> {
                                   builder: (context) => const HomePage(),
                                 )),
                           })
-                      .catchError((error) => print("Failed to add user: $error"));
+                      .catchError(
+                          (error) => print("Failed to add user: $error"));
                   userDataController.setBio(_bioController.text);
                   userDataController.setDpLink(_dpController.text);
                   userDataController.setName(_nameController.text);

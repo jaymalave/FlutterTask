@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_task/controllers/userdata_controller.dart';
 import 'package:flutter_task/utils/colors.dart';
 import 'package:flutter_task/utils/constants.dart';
+import 'package:flutter_task/views/edit_profile.dart';
 import 'package:flutter_task/views/home_page.dart';
 import 'package:get/get.dart';
 
@@ -14,34 +15,84 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   final userDataController = Get.put(UserDataController());
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => false,
-      child: Scaffold(
-        body: Column(
+      child: Column(
           children: [
-            const Center(child: Text(Constants.profileHead)),
-            Center(child: Text(userDataController.name)),
-            Center(child: Text(userDataController.bio)),
-            Center(child: Text(userDataController.username)),
-            Center(
-              child: Image.network(userDataController.dp),
+            const SizedBox(
+              height: 30,
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomePage(),
+            const Center(
+                child: Text(
+              Constants.profileHead,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            )),
+            const SizedBox(
+              height: 30,
+            ),
+            Center(
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(userDataController.dp),
+                radius: 50,
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text("Name:",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: Text(userDataController.name)),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text("Username:",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: Text(userDataController.username),
                   ),
-                );
-              },
-              child: const Text("Back to Homepage"),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text("Bio:",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: Text(userDataController.bio),),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
           ],
         ),
-      ),
     );
   }
 }

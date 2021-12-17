@@ -21,8 +21,15 @@ class _HomeState extends State<Home> {
     '7': 'RollsRoyce',
     '8': 'Porsche',
   };
-
   Map<String, String> carsData = Map.from(carsDataMap);
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  final _searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -34,6 +41,7 @@ class _HomeState extends State<Home> {
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: TextField(
+                controller: _searchController,
                 onSubmitted: (textFieldValue) {
                   textFieldValue.isEmpty
                       ? carsData = carsDataMap
@@ -48,11 +56,20 @@ class _HomeState extends State<Home> {
                   color: Colors.black,
                 ),
                 decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  contentPadding:
+                      const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                   prefixIcon: const Icon(Icons.search),
+                  suffixIcon: ElevatedButton(
+                    onPressed: () {
+                      _searchController.clear();
+                      setState(() {});
+                    },
+                    child: const Icon(Icons.cancel),
+                  ),
                   hintText: "Search a Car",
                   border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white70, width: 1.0),
+                    borderSide:
+                        const BorderSide(color: Colors.white70, width: 1.0),
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                 ),
@@ -72,8 +89,14 @@ class _HomeState extends State<Home> {
                     mainAxisSpacing: 20),
                 itemCount: carsData.length,
                 itemBuilder: (BuildContext ctx, index) {
-                  return Container(
-                    alignment: Alignment.center,
+                  return Card(
+                    shadowColor: Colors.black,
+                    elevation: 5,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
+                      ),
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -88,9 +111,6 @@ class _HomeState extends State<Home> {
                         ),
                       ],
                     ),
-                    decoration: BoxDecoration(
-                        color: AppPallete.primary,
-                        borderRadius: BorderRadius.circular(15)),
                   );
                 }),
           ),
