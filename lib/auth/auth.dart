@@ -83,37 +83,37 @@ class _LoginViewState extends State<LoginView> {
                           .collection('users')
                           .where('phone', isEqualTo: phoneNo)
                           .get()
-                          .then((QuerySnapshot<Map<String, dynamic>> doc) => {
-                                //if (doc.docs.first.exists)
-                                if (doc.docs.isEmpty)
-                                  {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const ProfilePage(),
-                                        )),
-                                  }
-                                else
-                                  {
-                                    data = doc.docs.first.data(),
-                                    print(data['username'] +
-                                        data['name'] +
-                                        data['phone']),
-                                    userDataController.setName(data['name']),
-                                    userDataController
-                                        .setUsername(data['username']),
-                                    userDataController.setPhone(data['phone']),
-                                    userDataController.setBio(data['bio']),
-                                    userDataController.setDpLink(data['dp']),
-                                    Navigator.push(
+                          .then(
+                            (QuerySnapshot<Map<String, dynamic>> doc) => {
+                              //if (doc.docs.first.exists)
+                              if (doc.docs.isEmpty)
+                                {
+                                  Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => const HomePage(),
-                                      ),
+                                        builder: (context) =>
+                                            const ProfilePage(),
+                                      )),
+                                }
+                              else
+                                {
+                                  data = doc.docs.first.data(),
+                                  userDataController.setUserState(
+                                    data['name'],
+                                    data['username'],
+                                    data['phone'],
+                                    data['bio'],
+                                    data['dp'],
+                                  ),
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const HomePage(),
                                     ),
-                                  }
-                              });
+                                  ),
+                                }
+                            },
+                          );
                     },
                   ),
                 ),
@@ -126,7 +126,6 @@ class _LoginViewState extends State<LoginView> {
         Navigator.pop(context);
         Toast.show("OTP expired, try again!", context,
             duration: Toast.LENGTH_LONG, gravity: Toast.TOP);
-        
       },
     );
   }

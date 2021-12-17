@@ -88,9 +88,9 @@ class _DetailSetupState extends State<DetailSetup> {
                           })
                       .catchError(
                           (error) => print("Failed to add user: $error"));
-                  userDataController.setBio(_bioController.text);
-                  userDataController.setDpLink(_dpController.text);
-                  userDataController.setName(_nameController.text);
+
+                  userDataController.setDetails(_nameController.text,
+                      _bioController.text, _dpController.text);
                 },
                 child: const Text(Constants.register),
               )

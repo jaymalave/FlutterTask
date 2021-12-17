@@ -26,4 +26,19 @@ class UserDataController extends GetxController {
   void setDpLink(String dpLink) {
     dp = dpLink;
   }
+
+  void setUserState(String sessionName, String sessionUsername,
+      String sessionPhoneNo, String sessionBio, String sessionDp) {
+    setName(sessionName);
+    setUsername(sessionUsername);
+    setPhone(sessionPhoneNo);
+    setBio(sessionBio);
+    setDpLink(sessionDp);
+  }
+
+  void setDetails(String detailsName, detailsBio, detailsDp) {
+    setName(detailsName);
+    setBio(detailsBio);
+    setDpLink(detailsDp);
+  }
 }
