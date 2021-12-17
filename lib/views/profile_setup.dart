@@ -6,6 +6,7 @@ import 'package:flutter_task/utils/constants.dart';
 import 'package:flutter_task/views/detail_setup.dart';
 import 'package:flutter_task/views/home_page.dart';
 import 'package:get/get.dart';
+import 'package:toast/toast.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -54,6 +55,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             else
                               {
                                 print(Constants.usernameTaken),
+                                Toast.show("Username already exists!", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM),
                               }
                           });
                 },

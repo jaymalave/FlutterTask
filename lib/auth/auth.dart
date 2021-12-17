@@ -10,6 +10,7 @@ import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:toast/toast.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -42,6 +43,8 @@ class _LoginViewState extends State<LoginView> {
       verificationFailed: (FirebaseAuthException e) {
         if (e.code == 'invalid-phone-number') {
           print('The provided phone number is not valid.');
+          Toast.show("Enter a valid phone number", context,
+              duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
         }
       },
       codeSent: (String verificationId, int? resendToken) async {
@@ -59,69 +62,72 @@ class _LoginViewState extends State<LoginView> {
                 body: SizedBox(
                   width: MediaQuery.of(context).size.width * 1,
                   height: MediaQuery.of(context).size.height * 0.75,
-                    child: OTPTextField(
-                      length: 6,
-                      fieldWidth: 50,
-                      style: const TextStyle(fontSize: 17),
-                      textFieldAlignment: MainAxisAlignment.spaceEvenly,
-                      fieldStyle: FieldStyle.underline,
-                      onCompleted: (pin) async {
-                        String smsCode = pin;
+                  child: OTPTextField(
+                    length: 6,
+                    fieldWidth: 50,
+                    style: const TextStyle(fontSize: 17),
+                    textFieldAlignment: MainAxisAlignment.spaceEvenly,
+                    fieldStyle: FieldStyle.underline,
+                    onCompleted: (pin) async {
+                      String smsCode = pin;
 
-                        PhoneAuthCredential credential =
-                            PhoneAuthProvider.credential(
-                                verificationId: verificationId,
-                                smsCode: smsCode);
+                      PhoneAuthCredential credential =
+                          PhoneAuthProvider.credential(
+                              verificationId: verificationId, smsCode: smsCode);
 
-                        await auth.signInWithCredential(credential);
-                        print("user verified via otp");
-                        userDataController.setPhone(phoneNo);
-                        Map<String, dynamic> data;
-                        FirebaseFirestore.instance
-                            .collection('users')
-                            .where('phone', isEqualTo: phoneNo)
-                            .get()
-                            .then((QuerySnapshot<Map<String, dynamic>> doc) => {
-                                  //if (doc.docs.first.exists)
-                                  if (doc.docs.isEmpty)
-                                    {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const ProfilePage(),
-                                          )),
-                                    }
-                                  else
-                                    {
-                                      data = doc.docs.first.data(),
-                                      print(data['username'] +
-                                          data['name'] +
-                                          data['phone']),
-                                      userDataController.setName(data['name']),
-                                      userDataController
-                                          .setUsername(data['username']),
-                                      userDataController
-                                          .setPhone(data['phone']),
-                                      userDataController.setBio(data['bio']),
-                                      userDataController.setDpLink(data['dp']),
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const HomePage(),
-                                          )),
-                                    }
-                                });
-                      },
-                    ),
+                      await auth.signInWithCredential(credential);
+                      print("user verified via otp");
+                      userDataController.setPhone(phoneNo);
+                      Map<String, dynamic> data;
+                      FirebaseFirestore.instance
+                          .collection('users')
+                          .where('phone', isEqualTo: phoneNo)
+                          .get()
+                          .then((QuerySnapshot<Map<String, dynamic>> doc) => {
+                                //if (doc.docs.first.exists)
+                                if (doc.docs.isEmpty)
+                                  {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const ProfilePage(),
+                                        )),
+                                  }
+                                else
+                                  {
+                                    data = doc.docs.first.data(),
+                                    print(data['username'] +
+                                        data['name'] +
+                                        data['phone']),
+                                    userDataController.setName(data['name']),
+                                    userDataController
+                                        .setUsername(data['username']),
+                                    userDataController.setPhone(data['phone']),
+                                    userDataController.setBio(data['bio']),
+                                    userDataController.setDpLink(data['dp']),
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const HomePage(),
+                                      ),
+                                    ),
+                                  }
+                              });
+                    },
                   ),
                 ),
+              ),
             );
           },
         );
       },
-      codeAutoRetrievalTimeout: (String verificationId) {},
+      codeAutoRetrievalTimeout: (String verificationId) {
+        Navigator.pop(context);
+        Toast.show("OTP expired, try again!", context,
+            duration: Toast.LENGTH_LONG, gravity: Toast.TOP);
+        
+      },
     );
   }
 
