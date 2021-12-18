@@ -122,11 +122,7 @@ class _LoginViewState extends State<LoginView> {
           },
         );
       },
-      codeAutoRetrievalTimeout: (String verificationId) {
-        Navigator.pop(context);
-        Toast.show(Constants.otpExpired, context,
-            duration: Toast.LENGTH_LONG, gravity: Toast.TOP);
-      },
+      codeAutoRetrievalTimeout: (String verificationId) {},
     );
   }
 
@@ -154,6 +150,7 @@ class _LoginViewState extends State<LoginView> {
                 child: Center(
                   child: TextField(
                     controller: _phoneController,
+                    keyboardType: TextInputType.phone,
                   ),
                 ),
               ),

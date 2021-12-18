@@ -37,8 +37,6 @@ dependencies:
   otp_text_field: ^1.1.1
   get: ^4.6.1
   flashy_tab_bar: ^0.0.3
-  anim_search_bar: ^2.0.2
-  shared_preferences: ^2.0.11
   toast: ^0.1.5
   
 

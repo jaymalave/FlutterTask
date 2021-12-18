@@ -5,7 +5,6 @@ import 'package:flutter_task/controllers/userdata_controller.dart';
 import 'package:flutter_task/utils/colors.dart';
 import 'package:flutter_task/utils/constants.dart';
 import 'package:flutter_task/views/home_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 
 class DetailSetup extends StatefulWidget {
@@ -20,7 +19,6 @@ class _DetailSetupState extends State<DetailSetup> {
   final _bioController = TextEditingController();
   final _dpController = TextEditingController();
   final userDataController = Get.put(UserDataController());
-  late SharedPreferences sharedPref;
   var userToken;
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   @override

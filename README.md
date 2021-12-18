@@ -1,16 +1,26 @@
-# flutter_task
+# Flutter Task App
 
-A new Flutter project.
+### Screenshots
+<img src="assets/screenshots/enter_phone_screen.png">
+<img src="assets/screenshots/otp_screen.png">
+<img src="assets/screenshots/home_page.png">
+<img src="assets/screenshots/profile.png">
+<img src="assets/screenshots/edit_profile.png">
+<img src="assets/screenshots/cloud_firestore.png">
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### A brief overview of the packages used
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ - [get](https://pub.dev/packages/get)  
+ GetX is the state management tool used in the app.
+ Using GetX has many advantages such as it is easy to maintain the state, and also GetX is a dependency manager, navigation manager alongside being a state manager. 
+ This advantage of GetX helps flutter development in the long run
+ - [flashy_tab_bar](https://pub.dev/packages/flashy_tab_bar)  
+ FlashyTabBar is used as a more attractive alternative to BottomNavigationBar
+ - [toast](https://pub.dev/packages/toast)  
+ Toast is used to show short spanned error/warning messages
+ - [otp_text_field](https://pub.dev/packages/otp_text_field)  
+ OTP text field is used for OTP handling in the UI
+
