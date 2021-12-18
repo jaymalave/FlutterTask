@@ -19,4 +19,6 @@ class Constants {
   static const home = 'Home';
   static const editProfile = 'Edit Profile';
   static const profile = 'Profile';
+  static const userAdded = "User addded successsfully";
+  static const userNotAdded = "Failed to add this user";
 }

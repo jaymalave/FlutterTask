@@ -4,8 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_task/controllers/userdata_controller.dart';
 import 'package:flutter_task/utils/colors.dart';
 import 'package:flutter_task/utils/constants.dart';
+import 'package:flutter_task/utils/user_preferences.dart';
 import 'package:flutter_task/views/home_page.dart';
 import 'package:get/get.dart';
+import 'package:toast/toast.dart';
 
 class DetailSetup extends StatefulWidget {
   const DetailSetup({Key? key}) : super(key: key);
@@ -77,15 +79,26 @@ class _DetailSetupState extends State<DetailSetup> {
                         'userToken': userToken, // 42
                       })
                       .then((value) => {
-                            print("User Added"),
+                            Toast.show(Constants.userAdded, context,
+                                duration: Toast.LENGTH_LONG,
+                                gravity: Toast.BOTTOM),
+                            UserPreferences.setUsername(
+                                userDataController.username),
+                            UserPreferences.setName(_nameController.text),
+                            UserPreferences.setPhone(userDataController.phone),
+                            UserPreferences.setDp(_dpController.text),
+                            UserPreferences.setBio(_bioController.text),
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const HomePage(),
-                                )),
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HomePage(),
+                              ),
+                            ),
                           })
                       .catchError(
-                          (error) => print("Failed to add user: $error"));
+                        (error) => Toast.show(Constants.userNotAdded, context,
+                            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM),
+                      );
 
                   userDataController.setDetails(_nameController.text,
                       _bioController.text, _dpController.text);
