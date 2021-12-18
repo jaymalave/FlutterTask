@@ -2,6 +2,7 @@ import 'package:flashy_tab_bar/flashy_tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_task/controllers/userdata_controller.dart';
 import 'package:flutter_task/utils/colors.dart';
+import 'package:flutter_task/utils/constants.dart';
 import 'package:flutter_task/views/edit_profile.dart';
 import 'package:flutter_task/views/home.dart';
 import 'package:flutter_task/views/profile_setup.dart';
@@ -28,7 +29,6 @@ class _HomePageState extends State<HomePage> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        backgroundColor: AppPallete.bgColor,
         bottomNavigationBar: FlashyTabBar(
           backgroundColor: AppPallete.color[900],
           selectedIndex: _currentIndex,
@@ -38,26 +38,39 @@ class _HomePageState extends State<HomePage> {
           }),
           items: [
             FlashyTabBarItem(
-              icon: const Icon(Icons.home_filled, color: AppPallete.textLight,),
-              title: const Text('Home', style: TextStyle(color: AppPallete.textLight)),
+              icon: const Icon(
+                Icons.home_filled,
+                color: AppPallete.textLight,
+              ),
+              title: const Text(Constants.home,
+                  style: TextStyle(color: AppPallete.textLight)),
             ),
             FlashyTabBarItem(
-              icon: const Icon(Icons.edit_outlined, color: AppPallete.textLight,),
-              title: const Text('Edit Profile', style: TextStyle(color: AppPallete.textLight)),
+              icon: const Icon(
+                Icons.edit_outlined,
+                color: AppPallete.textLight,
+              ),
+              title: const Text(Constants.editProfile,
+                  style: TextStyle(color: AppPallete.textLight)),
             ),
             FlashyTabBarItem(
-              icon: const Icon(Icons.account_circle, color: AppPallete.textLight,),
-              title: const Text('Profile', style: TextStyle(color: AppPallete.textLight)),
+              icon: const Icon(
+                Icons.account_circle,
+                color: AppPallete.textLight,
+              ),
+              title: const Text(
+                Constants.editProfile,
+                style: TextStyle(color: AppPallete.textLight),
+              ),
             ),
-          
           ],
         ),
         body: tabs[_currentIndex],
         appBar: AppBar(
-          centerTitle: true, 
-          title: const Text("Flutter Task App"),
+          centerTitle: true,
+          title: const Text(Constants.appHead),
           automaticallyImplyLeading: false,
-          ),
+        ),
       ),
     );
   }

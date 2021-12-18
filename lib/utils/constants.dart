@@ -12,4 +12,11 @@ class Constants {
   static const formBio = 'Tell us about yourself';
   static const profileHead = 'Profile Page';
   static const editProfileHead = 'Edit Profile';
+  static const userVerified = 'User Verified';
+  static const otpExpired = 'OTP expired, try again!';
+  static const carDetails = 'Car details';
+  static const appHead = 'Flutter Task App';
+  static const home = 'Home';
+  static const editProfile = 'Edit Profile';
+  static const profile = 'Profile';
 }

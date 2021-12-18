@@ -124,7 +124,7 @@ class _LoginViewState extends State<LoginView> {
       },
       codeAutoRetrievalTimeout: (String verificationId) {
         Navigator.pop(context);
-        Toast.show("OTP expired, try again!", context,
+        Toast.show(Constants.otpExpired, context,
             duration: Toast.LENGTH_LONG, gravity: Toast.TOP);
       },
     );

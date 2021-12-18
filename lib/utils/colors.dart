@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 
 class AppPallete {
-  static const bgColor = Colors.white;
   static const textLight = Colors.white;
   static const textDark = Colors.black;
-  static const swatch = Colors.black;
   static const Map<int, Color> color = {
     50: Color.fromRGBO(136, 14, 79, .1),
     100: Color.fromRGBO(136, 14, 79, .2),

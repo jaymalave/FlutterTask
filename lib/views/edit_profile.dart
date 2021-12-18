@@ -78,44 +78,68 @@ class _EditProfileState extends State<EditProfile> {
         ),
         Center(
           child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.9,
+            width: MediaQuery.of(context).size.width * 1,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  "Name:",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Card(
+                  elevation: 0,
+                  child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.2,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: const Text(
+                        "Name:",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
                 ),
                 // Text(userDataController.name),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  child: Text(userDataController.name),
+                Card(
+                  shadowColor: Colors.black,
+                  elevation: 5,
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          userDataController.name,
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
+
                 ElevatedButton(
                   onPressed: () {
                     showDialog(
-                        context: context,
-                        builder: (context) => Scaffold(
-                              body: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: TextField(
-                                      controller: _updateNameController,
-                                    ),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      editdataController
-                                          .editName(_updateNameController.text);
-                                      Navigator.pop(context);
-                                      setState(() {});
-                                    },
-                                    child: const Text("Update name"),
-                                  ),
-                                ],
+                      context: context,
+                      builder: (context) => Scaffold(
+                        body: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: TextField(
+                                controller: _updateNameController,
                               ),
-                            ));
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                editdataController
+                                    .editName(_updateNameController.text);
+                                Navigator.pop(context);
+                                setState(() {});
+                              },
+                              child: const Text("Update name"),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
                   },
                   child: const Icon(
                     Icons.edit,
@@ -126,14 +150,39 @@ class _EditProfileState extends State<EditProfile> {
           ),
         ),
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: MediaQuery.of(context).size.width * 1,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("Bio:", style: TextStyle(fontWeight: FontWeight.bold)),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: Text(userDataController.bio),
+               Card(
+                elevation: 0,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Text(
+                      "Bio:",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ),
+              Card(
+                shadowColor: Colors.black,
+                elevation: 5,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        userDataController.bio,
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                  ),
+                ),
               ),
               ElevatedButton(
                 onPressed: () {

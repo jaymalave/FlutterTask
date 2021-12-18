@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_task/utils/constants.dart';
 import 'package:flutter_task/views/home_page.dart';
 
 class CarView extends StatelessWidget {
@@ -10,7 +11,7 @@ class CarView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Car Details"),
+        title: const Text(Constants.carDetails),
         automaticallyImplyLeading: false,
       ),
       body: Column(
