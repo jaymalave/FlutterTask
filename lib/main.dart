@@ -45,13 +45,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       theme: ThemeData(primarySwatch: colorCustom),
       home: Scaffold(
-        body: name == '' ||
-                username == '' ||
-                bio == '' ||
-                phone == '' ||
-                dp == ''
-            ? const LoginView()
-            : const HomePage(),
+        body:
+            name == '' || username == '' || bio == '' || phone == '' || dp == ''
+                ? const LoginView()
+                : const HomePage(),
       ),
     );
   }

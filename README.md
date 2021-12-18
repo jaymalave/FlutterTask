@@ -23,4 +23,6 @@
  Toast is used to show short spanned error/warning messages
  - [otp_text_field](https://pub.dev/packages/otp_text_field)  
  OTP text field is used for OTP handling in the UI
+ - [shared_preferences](https://pub.dev/packages/shared_preferences)  
+   Shared preferences is a package used to store the user data in local storage of the machine so as to redirect him directly to the home page when he logs in for the second and further times.
 
