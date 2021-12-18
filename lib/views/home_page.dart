@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                 color: AppPallete.textLight,
               ),
               title: const Text(
-                Constants.editProfile,
+                Constants.profile,
                 style: TextStyle(color: AppPallete.textLight),
               ),
             ),
