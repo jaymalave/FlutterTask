@@ -26,30 +26,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   MaterialColor colorCustom = const MaterialColor(0xFF880E4F, AppPallete.color);
-  var name, username, phone, bio, dp;
-
-  @override
-  void initState() {
-    super.initState();
-    name = UserPreferences.getName();
-    username = UserPreferences.getUsername();
-    phone = UserPreferences.getPhone();
-    bio = UserPreferences.getBio();
-    dp = UserPreferences.getDp();
-    final userDataController = Get.put(UserDataController());
-    userDataController.setUserState(name!, username!, phone!, bio!, dp!);
-  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primarySwatch: colorCustom),
-      home: Scaffold(
-        body:
-            name == '' || username == '' || bio == '' || phone == '' || dp == ''
-                ? const LoginView()
-                : const HomePage(),
-      ),
+      home: const Scaffold(body: LoginView()),
     );
   }
 }
