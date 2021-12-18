@@ -156,7 +156,8 @@ class _LoginViewState extends State<LoginView> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  loginUser(_phoneController.text);
+                  String userPhone = '+91' + _phoneController.text;
+                  loginUser(userPhone);
                 },
                 child: const Text('Done'),
               ),

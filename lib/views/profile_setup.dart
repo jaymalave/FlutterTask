@@ -30,6 +30,14 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         body: Column(
           children: [
+           const Center(
+              child: SizedBox(
+                child: Text("Enter the userrname"),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
             TextField(
               controller: _usernameController,
             ),

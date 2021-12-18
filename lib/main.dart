@@ -26,12 +26,14 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   MaterialColor colorCustom = const MaterialColor(0xFF880E4F, AppPallete.color);
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primarySwatch: colorCustom),
-      home:  Scaffold(body: UserPreferences.checkState() ? HomePage() : LoginView()),
+      home: const Scaffold(
+        body: LoginView(),
+      ),
     );
   }
 }

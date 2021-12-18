@@ -12,7 +12,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   static Map<String, String> carsDataMap = CarData.cdMap;
 
   Map<String, String> carsData = Map.from(carsDataMap);
@@ -80,39 +79,39 @@ class _HomeState extends State<Home> {
                 itemBuilder: (BuildContext ctx, index) {
                   return SizedBox(
                     height: 500,
-                    child: Card(
-                      shadowColor: Colors.black,
-                      elevation: 5,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                CarView(name: carsData.values.elementAt(index)),
+                          ),
+                        );
+                      },
+                      child: Card(
+                        shadowColor: Colors.black,
+                        elevation: 5,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
                         ),
-                      ),
-                      child: SizedBox(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(carsData.values.elementAt(index)),
-                            Center(
-                              child: Image(
-                                image: AssetImage(
-                                    'assets/images/${carsData.values.elementAt(index)}.png'),
-                                height: 75,
+                        child: SizedBox(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(carsData.values.elementAt(index)),
+                              Center(
+                                child: Image(
+                                  image: AssetImage(
+                                      'assets/images/${carsData.values.elementAt(index)}.png'),
+                                  height: 75,
+                                ),
                               ),
-                            ),
-                            OutlinedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => CarView(name: carsData.values.elementAt(index)),
-                                  ),
-                                );
-                              },
-                              child: const Text(Constants.carDetails),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
