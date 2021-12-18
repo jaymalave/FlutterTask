@@ -1,12 +1,12 @@
 # Flutter Task App
 
 ### Screenshots
-<img src="assets/screenshots/enter_phone_screen.png">
-<img src="assets/screenshots/otp_screen.png">
-<img src="assets/screenshots/home_page.png">
-<img src="assets/screenshots/profile.png">
-<img src="assets/screenshots/edit_profile.png">
-<img src="assets/screenshots/cloud_firestore.png">
+<img src="assets/screenshots/enter_phone_screen.png" height="600" width="350">
+<img src="assets/screenshots/otp_screen.png" height="600" width="350">
+<img src="assets/screenshots/home_page.png" height="600" width="350">
+<img src="assets/screenshots/profile.png height="600" width="350">
+<img src="assets/screenshots/edit_profile.png" height="600" width="350">
+<img src="assets/screenshots/cloud_firestore.png" height="500" width="900">
 
 
 
