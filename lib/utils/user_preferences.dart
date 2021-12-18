@@ -1,13 +1,16 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
+import 'package:flutter_task/controllers/userdata_controller.dart';
 
 class UserPreferences {
   static SharedPreferences? _preferences;
+  final userDataController = Get.put(UserDataController());
 
-  static const _keyUsername = 'username';
-  static const _keyName = 'name';
-  static const _keyPhone = 'phone';
-  static const _keyBio = 'bio';
-  static const _keyDp = 'dp';
+  static const _keyUsername = '';
+  static const _keyName = '';
+  static const _keyPhone = '';
+  static const _keyBio = '';
+  static const _keyDp = '';
 
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
@@ -28,4 +31,22 @@ class UserPreferences {
   static String? getBio() => _preferences!.getString(_keyBio);
   static String? getPhone() => _preferences!.getString(_keyPhone);
   static String? getDp() => _preferences!.getString(_keyDp);
+
+  static bool checkState() {
+    bool val = getUsername() == '' ||
+            getName() == '' ||
+            getBio() == '' ||
+            getPhone() == '' ||
+            getDp() == ''
+        ? false
+        : true;
+    return val;
+  }
+
+  setFromPreferred() {
+    if (checkState()) {
+      userDataController.setUserState(
+          _keyName, _keyUsername, _keyPhone, _keyBio, _keyDp);
+    }
+  }
 }
