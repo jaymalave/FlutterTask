@@ -45,11 +45,11 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       theme: ThemeData(primarySwatch: colorCustom),
       home: Scaffold(
-        body: name == null ||
-                username == null ||
-                bio == null ||
-                phone == null ||
-                dp == null
+        body: name == '' ||
+                username == '' ||
+                bio == '' ||
+                phone == '' ||
+                dp == ''
             ? const LoginView()
             : const HomePage(),
       ),
