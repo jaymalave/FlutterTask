@@ -3,6 +3,8 @@ import 'package:flutter_task/utils/car_data.dart';
 import 'package:flutter_task/utils/colors.dart';
 import 'package:flutter_task/utils/constants.dart';
 import 'package:flutter_task/views/car_view.dart';
+import 'package:flutter_task/views/home_page.dart';
+import 'package:toast/toast.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,6 +17,34 @@ class _HomeState extends State<Home> {
   static Map<String, String> carsDataMap = CarData.cdMap;
 
   Map<String, String> carsData = Map.from(carsDataMap);
+
+  invalidHandler() {
+    carsData = {};
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return Scaffold(
+            appBar:
+                AppBar(title: const Text("No Car found"), centerTitle: true),
+            body: Column(children: [
+              const Text("Oops, no such car found"),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                      const HomePage(),
+                    ),
+                  );
+                },
+                child: const Text("Go back to Search"),
+              ),
+            ]),
+          );
+        });
+  }
 
   @override
   void initState() {
@@ -41,7 +71,7 @@ class _HomeState extends State<Home> {
                       : carsData.containsValue(textFieldValue)
                           ? carsData.removeWhere(
                               (key, value) => value != textFieldValue)
-                          : carsData = {};
+                          : invalidHandler();
                   setState(() {
                     _searchController.clear();
                   });
