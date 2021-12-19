@@ -27,21 +27,31 @@ class _HomeState extends State<Home> {
           return Scaffold(
             appBar:
                 AppBar(title: const Text("No Car found"), centerTitle: true),
-            body: Column(children: [
-              const Text("Oops, no such car found"),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                      const HomePage(),
-                    ),
-                  );
-                },
-                child: const Text("Go back to Search"),
-              ),
-            ]),
+            body: Center(
+              child: Column(children: [
+                const SizedBox(
+                  height: 100,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text("Oops, no such car found"),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+                    },
+                    child: const Text("Go back to Search"),
+                  ),
+                ),
+              ]),
+            ),
           );
         });
   }
