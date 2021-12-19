@@ -46,32 +46,116 @@ class _DetailSetupState extends State<DetailSetup> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text(Constants.formName),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: _nameController,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const SizedBox(
+                      width: 75,
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          Constants.formName,
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 300,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: _nameController,
+                          decoration: InputDecoration(
+                            hintText: 'e.g John Doe',
+                            border: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 10,
+                                style: BorderStyle.solid,
+                              ),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                const Text(Constants.formBio),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: _bioController,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const SizedBox(
+                      width: 75,
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          Constants.formBio,
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 300,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          minLines: 3,
+                          maxLines: 5,
+                          controller: _bioController,
+                          decoration: InputDecoration(
+                            hintText:
+                                'e.g Software Developer, Guitarist, Books Enthusiast',
+                            border: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 10,
+                                style: BorderStyle.solid,
+                              ),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                const Text(Constants.formProfile),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: _dpController,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const SizedBox(
+                      width: 75,
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          Constants.formProfile,
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 300,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          controller: _dpController,
+                          decoration: InputDecoration(
+                            hintText: "Enter address of your profile picture",
+                            border: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 10,
+                                style: BorderStyle.solid,
+                              ),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 10,
@@ -95,7 +179,8 @@ class _DetailSetupState extends State<DetailSetup> {
                               UserPreferences.setUsername(
                                   userDataController.username),
                               UserPreferences.setName(_nameController.text),
-                              UserPreferences.setPhone(userDataController.phone),
+                              UserPreferences.setPhone(
+                                  userDataController.phone),
                               UserPreferences.setDp(_dpController.text),
                               UserPreferences.setBio(_bioController.text),
                               Navigator.push(
@@ -107,9 +192,10 @@ class _DetailSetupState extends State<DetailSetup> {
                             })
                         .catchError(
                           (error) => Toast.show(Constants.userNotAdded, context,
-                              duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM),
+                              duration: Toast.LENGTH_LONG,
+                              gravity: Toast.BOTTOM),
                         );
-          
+
                     userDataController.setDetails(_nameController.text,
                         _bioController.text, _dpController.text);
                   },

@@ -8,8 +8,8 @@ class Constants {
   static const profileSetup = 'Profile Setup';
   static const formUsername = 'Enter username';
   static const formName = 'Name';
-  static const formProfile = 'Profile Picture Address';
-  static const formBio = 'Tell us about yourself';
+  static const formProfile = 'Profile Picture';
+  static const formBio = 'Bio';
   static const profileHead = 'Profile Page';
   static const editProfileHead = 'Edit Profile';
   static const userVerified = 'User Verified';
