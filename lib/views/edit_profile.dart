@@ -173,7 +173,7 @@ class _EditProfileState extends State<EditProfile> {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.6,
                   child: Align(
-                    alignment: Alignment.center,
+                    alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(

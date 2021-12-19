@@ -40,72 +40,83 @@ class _DetailSetupState extends State<DetailSetup> {
             backgroundColor: AppPallete.color[900],
             automaticallyImplyLeading: false,
           ),
-          body: Column(
-            children: [
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(Constants.formName),
-              TextField(
-                controller: _nameController,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(Constants.formBio),
-              TextField(
-                controller: _bioController,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(Constants.formProfile),
-              TextField(
-                controller: _dpController,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  users
-                      .doc(userDataController.username)
-                      .set({
-                        'bio': _bioController.text,
-                        'name': _nameController.text,
-                        'dp': _dpController.text,
-                        'phone': userDataController.phone,
-                        'username': userDataController.username,
-                        'userToken': userToken, // 42
-                      })
-                      .then((value) => {
-                            Toast.show(Constants.userAdded, context,
-                                duration: Toast.LENGTH_LONG,
-                                gravity: Toast.BOTTOM),
-                            UserPreferences.setUsername(
-                                userDataController.username),
-                            UserPreferences.setName(_nameController.text),
-                            UserPreferences.setPhone(userDataController.phone),
-                            UserPreferences.setDp(_dpController.text),
-                            UserPreferences.setBio(_bioController.text),
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const HomePage(),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(Constants.formName),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: _nameController,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(Constants.formBio),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: _bioController,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(Constants.formProfile),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: _dpController,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    users
+                        .doc(userDataController.username)
+                        .set({
+                          'bio': _bioController.text,
+                          'name': _nameController.text,
+                          'dp': _dpController.text,
+                          'phone': userDataController.phone,
+                          'username': userDataController.username,
+                          'userToken': userToken, // 42
+                        })
+                        .then((value) => {
+                              Toast.show(Constants.userAdded, context,
+                                  duration: Toast.LENGTH_LONG,
+                                  gravity: Toast.BOTTOM),
+                              UserPreferences.setUsername(
+                                  userDataController.username),
+                              UserPreferences.setName(_nameController.text),
+                              UserPreferences.setPhone(userDataController.phone),
+                              UserPreferences.setDp(_dpController.text),
+                              UserPreferences.setBio(_bioController.text),
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const HomePage(),
+                                ),
                               ),
-                            ),
-                          })
-                      .catchError(
-                        (error) => Toast.show(Constants.userNotAdded, context,
-                            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM),
-                      );
-
-                  userDataController.setDetails(_nameController.text,
-                      _bioController.text, _dpController.text);
-                },
-                child: const Text(Constants.register),
-              )
-            ],
+                            })
+                        .catchError(
+                          (error) => Toast.show(Constants.userNotAdded, context,
+                              duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM),
+                        );
+          
+                    userDataController.setDetails(_nameController.text,
+                        _bioController.text, _dpController.text);
+                  },
+                  child: const Text(Constants.register),
+                )
+              ],
+            ),
           )),
     );
   }
