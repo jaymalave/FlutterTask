@@ -15,9 +15,10 @@ class CarView extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           const Text("This is about car details"),
-          Text(name),
+          Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
           Center(
             child: Image(
               image: AssetImage('assets/images/$name.png'),

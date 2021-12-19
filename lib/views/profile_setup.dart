@@ -30,16 +30,32 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         body: Column(
           children: [
-           const Center(
+            const Center(
               child: SizedBox(
-                child: Text("Enter the userrname"),
+                child: Text("Enter the username"),
               ),
             ),
             const SizedBox(
               height: 30,
             ),
-            TextField(
-              controller: _usernameController,
+            Center(
+              child: SizedBox(
+                height: 100,
+                width: 300,
+                child: TextField(
+                  controller: _usernameController,
+                  decoration: InputDecoration(
+                    hintText: 'e.g my_username1',
+                    border: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        width: 10,
+                        style: BorderStyle.solid,
+                      ),
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                ),
+              ),
             ),
             ElevatedButton(
                 onPressed: () {
@@ -63,7 +79,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             else
                               {
                                 print(Constants.usernameTaken),
-                                Toast.show("Username already exists!", context, duration: Toast.LENGTH_LONG, gravity:  Toast.BOTTOM),
+                                Toast.show("Username already exists!", context,
+                                    duration: Toast.LENGTH_LONG,
+                                    gravity: Toast.BOTTOM),
                               }
                           });
                 },
