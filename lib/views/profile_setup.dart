@@ -74,7 +74,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       .where('username', isEqualTo: _usernameController.text)
                       .get()
                       .then((QuerySnapshot<Map<String, dynamic>> doc) => {
-                            //if (doc.docs.first.exists)
                             if (doc.docs.isEmpty)
                               {
                                 userDataController
@@ -88,8 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               }
                             else
                               {
-                                print(Constants.usernameTaken),
-                                Toast.show("Username already exists!", context,
+                                Toast.show(Constants.usernameTaken, context,
                                     duration: Toast.LENGTH_LONG,
                                     gravity: Toast.BOTTOM),
                               }

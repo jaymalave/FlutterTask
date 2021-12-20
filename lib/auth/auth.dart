@@ -34,7 +34,6 @@ class _LoginViewState extends State<LoginView> {
       timeout: const Duration(seconds: 60),
       verificationCompleted: (PhoneAuthCredential credential) async {
         await auth.signInWithCredential(credential);
-        print("user verified");
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -43,7 +42,6 @@ class _LoginViewState extends State<LoginView> {
       },
       verificationFailed: (FirebaseAuthException e) {
         if (e.code == 'invalid-phone-number') {
-          print('The provided phone number is not valid.');
           Toast.show("Enter a valid phone number", context,
               duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
         }
@@ -78,7 +76,6 @@ class _LoginViewState extends State<LoginView> {
                               verificationId: verificationId, smsCode: smsCode);
 
                       await auth.signInWithCredential(credential);
-                      print("user verified via otp");
                       userDataController.setPhone(phoneNo);
                       Map<String, dynamic> data;
                       FirebaseFirestore.instance
@@ -87,7 +84,6 @@ class _LoginViewState extends State<LoginView> {
                           .get()
                           .then(
                             (QuerySnapshot<Map<String, dynamic>> doc) => {
-                              //if (doc.docs.first.exists)
                               if (doc.docs.isEmpty)
                                 {
                                   Navigator.push(

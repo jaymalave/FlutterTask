@@ -27,17 +27,6 @@ class NotFound extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    // child: ElevatedButton(
-                    //   onPressed: () {
-                    //     Navigator.push(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //         builder: (context) => const HomePage(),
-                    //       ),
-                    //     );
-                    //   },
-                    //   child: const Text("Go back to Search"),
-                    // ),
                     child: GlassyButton(
                       width: 200,
                       title: "Go back to search",

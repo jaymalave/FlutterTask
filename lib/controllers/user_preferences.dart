@@ -50,7 +50,6 @@ class UserPreferences {
     var phone = getPhone();
     var dp = getDp();
     if (checkState()) {
-      print(phone);
       userDataController.setUserState(
         name!,
         bio!,

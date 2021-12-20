@@ -3,6 +3,9 @@ import 'package:flutter_task/controllers/edit_data_controller.dart';
 import 'package:flutter_task/controllers/userdata_controller.dart';
 import 'package:flutter_task/utils/colors.dart';
 import 'package:flutter_task/utils/constants.dart';
+import 'package:flutter_task/views/update_bio.dart';
+import 'package:flutter_task/views/update_dp.dart';
+import 'package:flutter_task/views/update_name.dart';
 import 'package:get/get.dart';
 
 class EditProfile extends StatefulWidget {
@@ -14,10 +17,7 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   final userDataController = Get.put(UserDataController());
-  final editdataController = Get.put(EditDataController());
-  final _updateNameController = TextEditingController();
-  final _updateBioController = TextEditingController();
-  final _updateDpController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -49,46 +49,9 @@ class _EditProfileState extends State<EditProfile> {
                 ElevatedButton(
                   onPressed: () {
                     showDialog(
-                        context: context,
-                        builder: (context) => Scaffold(
-                             backgroundColor: AppPallete.bgColor,
-                              body: Column(
-                                children: [
-                                  Center(
-                                    child: SizedBox(
-                                      width: 300,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: TextField(
-                                          controller: _updateDpController,
-                                          decoration: InputDecoration(
-                                            hintText:
-                                                "Enter address of your profile picture",
-                                            border: OutlineInputBorder(
-                                              borderSide: const BorderSide(
-                                                width: 10,
-                                                style: BorderStyle.solid,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      editdataController
-                                          .editDp(_updateDpController.text);
-                                      Navigator.pop(context);
-                                      setState(() {});
-                                    },
-                                    child: const Text("Update Dp"),
-                                  ),
-                                ],
-                              ),
-                            ));
+                      context: context,
+                      builder: (context) => const UpdateDp(),
+                    );
                   },
                   child: const Icon(
                     Icons.edit,
@@ -142,44 +105,7 @@ class _EditProfileState extends State<EditProfile> {
                   onPressed: () {
                     showDialog(
                       context: context,
-                      builder: (context) => Scaffold(
-                        backgroundColor: AppPallete.bgColor,
-                        body: Column(
-                          children: [
-                            Center(
-                              child: SizedBox(
-                                width: 300,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TextField(
-                                    controller: _updateNameController,
-                                    decoration: InputDecoration(
-                                      hintText: "e.g Shawn Mendes",
-                                      border: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          width: 10,
-                                          style: BorderStyle.solid,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(5.0),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                editdataController
-                                    .editName(_updateNameController.text);
-                                Navigator.pop(context);
-                                setState(() {});
-                              },
-                              child: const Text("Update name"),
-                            ),
-                          ],
-                        ),
-                      ),
+                      builder: (context) => const UpdateName(),
                     );
                   },
                   child: const Icon(
@@ -230,46 +156,9 @@ class _EditProfileState extends State<EditProfile> {
               ElevatedButton(
                 onPressed: () {
                   showDialog(
-                      context: context,
-                      builder: (context) => Scaffold(
-                        backgroundColor: AppPallete.bgColor,
-                            body: Column(
-                              children: [
-                                Center(
-                                  child: SizedBox(
-                                    width: 300,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: TextField(
-                                        controller: _updateBioController,
-                                        decoration: InputDecoration(
-                                          hintText:
-                                              "",
-                                          border: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                              width: 10,
-                                              style: BorderStyle.solid,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(5.0),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    editdataController
-                                        .editBio(_updateBioController.text);
-                                    Navigator.pop(context);
-                                    setState(() {});
-                                  },
-                                  child: const Text("Update Bio"),
-                                ),
-                              ],
-                            ),
-                          ));
+                    context: context,
+                    builder: (context) => const UpdateBio(),
+                  );
                 },
                 child: const Icon(
                   Icons.edit,

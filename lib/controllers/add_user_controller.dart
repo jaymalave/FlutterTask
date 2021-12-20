@@ -19,7 +19,6 @@ class AddUserController extends GetxController {
       'username': user.username,
       'userToken': user.token, // 42
     }).then((value) => {
-          print("user added"),
           UserPreferences.setUsername(user.username),
           UserPreferences.setName(user.name),
           UserPreferences.setPhone(user.phone),

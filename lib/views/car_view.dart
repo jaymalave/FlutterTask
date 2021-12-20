@@ -31,17 +31,7 @@ class CarView extends StatelessWidget {
               height: 75,
             ),
           ),
-          // ElevatedButton(
-          //   onPressed: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (context) => const HomePage(),
-          //       ),
-          //     );
-          //   },
-          //   child: const Text("Back to Home Page"),
-          // ),
+
           GlassyButton(
             width: 200,
             title: "Back to Home Page",
