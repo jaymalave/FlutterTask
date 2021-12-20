@@ -28,12 +28,18 @@ class _MyAppState extends State<MyApp> {
   MaterialColor colorCustom = const MaterialColor(0xFF880E4F, AppPallete.color);
 
   @override
+  void initState() {
+    print(UserPreferences.getUsername());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primarySwatch: colorCustom),
-      home: const Scaffold(
-        body: LoginView(),
-      ),
+      home: Scaffold(
+          body: UserPreferences.checkState()
+              ? const HomePage()
+              : const LoginView()),
     );
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter_task/controllers/userdata_controller.dart';
 
 class UserPreferences {
   static SharedPreferences? _preferences;
-  final userDataController = Get.put(UserDataController());
+  static final userDataController = Get.put(UserDataController());
 
   static const _keyUsername = '';
   static const _keyName = '';
@@ -33,20 +33,21 @@ class UserPreferences {
   static String? getDp() => _preferences!.getString(_keyDp);
 
   static bool checkState() {
-    bool val = getUsername() == '' ||
-            getName() == '' ||
-            getBio() == '' ||
-            getPhone() == '' ||
-            getDp() == ''
+    bool val = getUsername() == null ||
+            getName() == null ||
+            getBio() == null ||
+            getPhone() == null ||
+            getDp() == null
         ? false
         : true;
     return val;
   }
 
-  setFromPreferred() {
+  static setFromPreferred() {
     if (checkState()) {
       userDataController.setUserState(
           _keyName, _keyUsername, _keyPhone, _keyBio, _keyDp);
     }
+    return 0;
   }
 }
