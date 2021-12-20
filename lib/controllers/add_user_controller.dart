@@ -22,7 +22,6 @@ class AddUserController extends GetxController {
           UserPreferences.setUsername(user.username),
           UserPreferences.setName(user.name),
           UserPreferences.setPhone(user.phone),
-          UserPreferences.setDp(user.dp),
           UserPreferences.setBio(user.bio),
           userDataController.setDetails(user.name, user.bio, user.dp),
         });

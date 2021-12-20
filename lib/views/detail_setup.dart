@@ -1,3 +1,5 @@
+import 'dart:io' as io;
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,6 +12,10 @@ import 'package:flutter_task/controllers/user_preferences.dart';
 import 'package:flutter_task/views/home_page.dart';
 import 'package:get/get.dart';
 import 'package:toast/toast.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_core/firebase_core.dart' as firebase_core;
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path/path.dart';
 
 class DetailSetup extends StatefulWidget {
   const DetailSetup({Key? key}) : super(key: key);
@@ -25,6 +31,8 @@ class _DetailSetupState extends State<DetailSetup> {
   final userDataController = Get.put(UserDataController());
   final addDataController = Get.put(AddUserController());
   var userToken;
+  var dpUrl;
+  File? _imageFile = null;
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   @override
   void initState() {
@@ -35,10 +43,45 @@ class _DetailSetupState extends State<DetailSetup> {
 
   @override
   Widget build(BuildContext context) {
+    final picker = ImagePicker();
+    var url;
+    Future pickImage() async {
+      final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+      setState(() {
+        _imageFile = File(pickedFile!.path);
+      });
+      
+    }
+
+    Future uploadImageToFirebase(BuildContext context) async {
+      String fileName = basename(_imageFile!.path);
+      firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+          .ref()
+          .child('uploads')
+          .child('/$fileName');
+      print(fileName);
+
+      final metadata = firebase_storage.SettableMetadata(
+          contentType: 'image/jpeg',
+          customMetadata: {'picked-file-path': fileName});
+      firebase_storage.UploadTask uploadTask;
+      //late StorageUploadTask uploadTask = firebaseStorageRef.putFile(_imageFile);
+      uploadTask = ref.putFile(io.File(_imageFile!.path), metadata);
+
+      firebase_storage.UploadTask task = await Future.value(uploadTask);
+      var uploadT = await Future.value(uploadTask);
+      var imageUrl = await uploadT.ref.getDownloadURL();
+      setState(() {
+        dpUrl = imageUrl;
+      });
+      print(dpUrl);
+    }
+
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        backgroundColor: AppPallete.bgColor,
+          backgroundColor: AppPallete.bgColor,
           appBar: AppBar(
             title: const Text(Constants.profileSetup),
             backgroundColor: AppPallete.color[900],
@@ -131,8 +174,8 @@ class _DetailSetupState extends State<DetailSetup> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const SizedBox(
+                  children: const [
+                    SizedBox(
                       width: 75,
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
@@ -143,42 +186,42 @@ class _DetailSetupState extends State<DetailSetup> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.75,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextField(
-                          controller: _dpController,
-                          decoration: InputDecoration(
-                            hintText: "Enter address of your profile picture",
-                            border: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                width: 10,
-                                style: BorderStyle.solid,
-                              ),
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
                 const SizedBox(
                   height: 10,
                 ),
+                SizedBox(
+                  height: 200,
+                  width: 300,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30.0),
+                    child: _imageFile != null
+                        ? Image.file(_imageFile!)
+                        : ElevatedButton(
+                            child: const Icon(
+                              Icons.add_a_photo,
+                              color: Colors.blue,
+                              size: 50,
+                            ),
+                            onPressed: pickImage,
+                          ),
+                  ),
+                ),
+                
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    await uploadImageToFirebase(context);
                     User userObj = User(
                       username: userDataController.username,
                       name: _nameController.text,
+                      dp: dpUrl,
                       bio: _bioController.text,
                       phone: userDataController.phone,
-                      dp: _dpController.text,
                       token: userToken,
                     );
                     addDataController.addUser(userObj);
-
+                    
                     Navigator.push(
                       context,
                       MaterialPageRoute(
