@@ -21,10 +21,10 @@ class _HomePageState extends State<HomePage> {
   final userDataController = Get.put(UserDataController());
   int _currentIndex = 0;
 
-  @override
-  void initState() {
-    UserPreferences.setFromPreferred();
-  }
+  // @override
+  // void initState() {
+  //   UserPreferences.setFromPreferred();
+  // }
 
   @override
   Widget build(BuildContext context) {
