@@ -1,6 +1,8 @@
 # Flutter Task App
 
-The code for this application follows MVC architecture along with GetX state management tools. 
+The code for this application follows MVC architecture along with GetX state management tools.   
+Authentication system uses ```flutterfire configure``` (dart-only config) and the 
+```google-services.json``` file is injected for apk release purpose only.    
 
 ### A brief overview of the packages used
 
