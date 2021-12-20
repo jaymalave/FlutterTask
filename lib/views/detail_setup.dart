@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_task/controllers/add_user_controller.dart';
 import 'package:flutter_task/controllers/userdata_controller.dart';
+import 'package:flutter_task/models/user_model.dart';
 import 'package:flutter_task/utils/colors.dart';
 import 'package:flutter_task/utils/constants.dart';
 import 'package:flutter_task/utils/user_preferences.dart';
@@ -21,6 +23,7 @@ class _DetailSetupState extends State<DetailSetup> {
   final _bioController = TextEditingController();
   final _dpController = TextEditingController();
   final userDataController = Get.put(UserDataController());
+  final addDataController = Get.put(AddUserController());
   var userToken;
   CollectionReference users = FirebaseFirestore.instance.collection('users');
   @override
@@ -55,7 +58,8 @@ class _DetailSetupState extends State<DetailSetup> {
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           Constants.formName,
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
                         ),
                       ),
                     ),
@@ -92,7 +96,8 @@ class _DetailSetupState extends State<DetailSetup> {
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           Constants.formBio,
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
                         ),
                       ),
                     ),
@@ -132,7 +137,8 @@ class _DetailSetupState extends State<DetailSetup> {
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           Constants.formProfile,
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
                         ),
                       ),
                     ),
@@ -162,42 +168,22 @@ class _DetailSetupState extends State<DetailSetup> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    users
-                        .doc(userDataController.username)
-                        .set({
-                          'bio': _bioController.text,
-                          'name': _nameController.text,
-                          'dp': _dpController.text,
-                          'phone': userDataController.phone,
-                          'username': userDataController.username,
-                          'userToken': userToken, // 42
-                        })
-                        .then((value) => {
-                              Toast.show(Constants.userAdded, context,
-                                  duration: Toast.LENGTH_LONG,
-                                  gravity: Toast.BOTTOM),
-                              UserPreferences.setUsername(
-                                  userDataController.username),
-                              UserPreferences.setName(_nameController.text),
-                              UserPreferences.setPhone(
-                                  userDataController.phone),
-                              UserPreferences.setDp(_dpController.text),
-                              UserPreferences.setBio(_bioController.text),
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const HomePage(),
-                                ),
-                              ),
-                            })
-                        .catchError(
-                          (error) => Toast.show(Constants.userNotAdded, context,
-                              duration: Toast.LENGTH_LONG,
-                              gravity: Toast.BOTTOM),
-                        );
+                    User userObj = User(
+                      username: userDataController.username,
+                      name: _nameController.text,
+                      bio: _bioController.text,
+                      phone: userDataController.phone,
+                      dp: _dpController.text,
+                      token: userToken,
+                    );
+                    addDataController.addUser(userObj);
 
-                    userDataController.setDetails(_nameController.text,
-                        _bioController.text, _dpController.text);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomePage(),
+                      ),
+                    );
                   },
                   child: const Text(Constants.register),
                 )

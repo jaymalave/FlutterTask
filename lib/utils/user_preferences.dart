@@ -6,11 +6,11 @@ class UserPreferences {
   static SharedPreferences? _preferences;
   static final userDataController = Get.put(UserDataController());
 
-  static const _keyUsername = '';
-  static const _keyName = '';
-  static const _keyPhone = '';
-  static const _keyBio = '';
-  static const _keyDp = '';
+  static var _keyUsername = null;
+  static var _keyName = null;
+  static var _keyPhone = null;
+  static var _keyBio = null;
+  static var _keyDp = null;
 
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
@@ -44,9 +44,20 @@ class UserPreferences {
   }
 
   static setFromPreferred() {
+    var name = getName();
+    var bio = getBio();
+    var username = getUsername();
+    var phone = getPhone();
+    var dp = getDp();
     if (checkState()) {
+      print(phone);
       userDataController.setUserState(
-          _keyName, _keyUsername, _keyPhone, _keyBio, _keyDp);
+        name!,
+        bio!,
+        phone!,
+        username!,
+        dp!,
+      );
     }
     return 0;
   }
