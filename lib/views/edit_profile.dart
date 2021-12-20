@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task/controllers/edit_data_controller.dart';
 import 'package:flutter_task/controllers/userdata_controller.dart';
+import 'package:flutter_task/utils/colors.dart';
 import 'package:flutter_task/utils/constants.dart';
 import 'package:get/get.dart';
 
@@ -84,11 +85,12 @@ class _EditProfileState extends State<EditProfile> {
               children: [
                 Card(
                   elevation: 0,
+                  color: AppPallete.bgColor,
                   child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.2,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: const Text(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
                         "Name:",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
@@ -97,6 +99,7 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 // Text(userDataController.name),
                 Card(
+                  color: AppPallete.bgColor,
                   shadowColor: Colors.black,
                   elevation: 5,
                   child: SizedBox(
@@ -154,13 +157,14 @@ class _EditProfileState extends State<EditProfile> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-               Card(
+              Card(
+                color: AppPallete.bgColor,
                 elevation: 0,
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.2,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: const Text(
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
                       "Bio:",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
@@ -168,6 +172,7 @@ class _EditProfileState extends State<EditProfile> {
                 ),
               ),
               Card(
+                color: AppPallete.bgColor,
                 shadowColor: Colors.black,
                 elevation: 5,
                 child: SizedBox(

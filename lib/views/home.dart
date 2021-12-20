@@ -4,6 +4,8 @@ import 'package:flutter_task/utils/colors.dart';
 import 'package:flutter_task/utils/constants.dart';
 import 'package:flutter_task/views/car_view.dart';
 import 'package:flutter_task/views/home_page.dart';
+import 'package:flutter_task/views/not_found_view.dart';
+import 'package:glassmorphism_buttons/glassmorphism_buttons.dart';
 import 'package:toast/toast.dart';
 
 class Home extends StatefulWidget {
@@ -24,35 +26,7 @@ class _HomeState extends State<Home> {
         context: context,
         barrierDismissible: false,
         builder: (context) {
-          return Scaffold(
-            appBar:
-                AppBar(title: const Text("No Car found"), centerTitle: true),
-            body: Center(
-              child: Column(children: [
-                const SizedBox(
-                  height: 100,
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text("Oops, no such car found"),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomePage(),
-                        ),
-                      );
-                    },
-                    child: const Text("Go back to Search"),
-                  ),
-                ),
-              ]),
-            ),
-          );
+          return const NotFound();
         });
   }
 
@@ -130,8 +104,9 @@ class _HomeState extends State<Home> {
                         );
                       },
                       child: Card(
+                        color: Colors.blueGrey[400],
                         shadowColor: Colors.black,
-                        elevation: 5,
+                        elevation: 10,
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(20),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 
 class AppPallete {
+  static const bgColor = Colors.blueGrey;
   static const textLight = Colors.white;
   static const textDark = Colors.black;
   static const Map<int, Color> color = {

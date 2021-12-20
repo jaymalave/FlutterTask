@@ -101,7 +101,7 @@ class _DetailSetupState extends State<DetailSetup> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextField(
-                          minLines: 3,
+                          minLines: null,
                           maxLines: 5,
                           controller: _bioController,
                           decoration: InputDecoration(

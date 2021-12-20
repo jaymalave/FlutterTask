@@ -177,6 +177,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.6.1"
+  glassmorphism_buttons:
+    dependency: "direct main"
+    description:
+      name: glassmorphism_buttons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.8"
   http_parser:
     dependency: transitive
     description:
@@ -338,4 +345,4 @@ packages:
     version: "2.1.0"
 sdks:
   dart: ">=2.12.0 <3.0.0"
-  flutter: ">=1.12.13+hotfix.5"
+  flutter: ">=1.17.0"

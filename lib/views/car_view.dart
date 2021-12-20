@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_task/utils/colors.dart';
 import 'package:flutter_task/utils/constants.dart';
 import 'package:flutter_task/views/home_page.dart';
+import 'package:glassmorphism_buttons/glassmorphism_buttons.dart';
 
 class CarView extends StatelessWidget {
   final String name;
@@ -10,6 +12,7 @@ class CarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppPallete.bgColor,
       appBar: AppBar(
         title: const Text(Constants.carDetails),
         automaticallyImplyLeading: false,
@@ -18,23 +21,39 @@ class CarView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           const Text("This is about car details"),
-          Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+          Text(
+            name,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+          ),
           Center(
             child: Image(
               image: AssetImage('assets/images/$name.png'),
               height: 75,
             ),
           ),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomePage(),
-                  ),
-                );
-              },
-              child: const Text("Back to Home Page"))
+          // ElevatedButton(
+          //   onPressed: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) => const HomePage(),
+          //       ),
+          //     );
+          //   },
+          //   child: const Text("Back to Home Page"),
+          // ),
+          GlassyButton(
+            width: 200,
+            title: "Back to Home Page",
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HomePage(),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );

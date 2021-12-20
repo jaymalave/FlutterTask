@@ -6,6 +6,7 @@ import 'package:flutter_task/utils/constants.dart';
 import 'package:flutter_task/views/home_page.dart';
 import 'package:flutter_task/views/profile_setup.dart';
 import 'package:get/get.dart';
+import 'package:glassmorphism_buttons/glassmorphism_buttons.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -55,6 +56,7 @@ class _LoginViewState extends State<LoginView> {
             return WillPopScope(
               onWillPop: () async => false,
               child: Scaffold(
+                backgroundColor: AppPallete.bgColor,
                 appBar: AppBar(
                   title: const Text(Constants.enterOtp),
                   backgroundColor: AppPallete.color[900],
@@ -131,6 +133,7 @@ class _LoginViewState extends State<LoginView> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        backgroundColor: AppPallete.bgColor,
         appBar: AppBar(
           title: const Text(Constants.loginWithOtp),
           automaticallyImplyLeading: false,
@@ -154,12 +157,14 @@ class _LoginViewState extends State<LoginView> {
                   ),
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  String userPhone = '+91' + _phoneController.text;
-                  loginUser(userPhone);
-                },
-                child: const Text('Done'),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: GlassyButton(
+                    title: "Done",
+                    onTap: () {
+                      String userPhone = '+91' + _phoneController.text;
+                      loginUser(userPhone);
+                    }),
               ),
             ],
           ),

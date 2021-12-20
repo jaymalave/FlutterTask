@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        backgroundColor: AppPallete.bgColor,
         bottomNavigationBar: FlashyTabBar(
           backgroundColor: AppPallete.color[900],
           selectedIndex: _currentIndex,

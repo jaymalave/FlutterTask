@@ -32,7 +32,16 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             const Center(
               child: SizedBox(
-                child: Text("Enter the username"),
+                child: Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Text(
+                    "Enter the username",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
               ),
             ),
             const SizedBox(
