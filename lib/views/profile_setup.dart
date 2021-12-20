@@ -24,6 +24,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        backgroundColor: AppPallete.bgColor,
         appBar: AppBar(
           title: const Text(Constants.profileSetup),
           backgroundColor: AppPallete.color[900],
