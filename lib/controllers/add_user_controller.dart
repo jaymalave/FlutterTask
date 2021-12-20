@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_task/controllers/userdata_controller.dart';
 import 'package:flutter_task/models/user_model.dart';
 import 'package:flutter_task/utils/constants.dart';
-import 'package:flutter_task/utils/user_preferences.dart';
+import 'package:flutter_task/controllers/user_preferences.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

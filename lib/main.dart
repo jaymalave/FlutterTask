@@ -3,7 +3,7 @@ import 'package:flutter_task/auth/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_task/controllers/userdata_controller.dart';
 import 'package:flutter_task/utils/colors.dart';
-import 'package:flutter_task/utils/user_preferences.dart';
+import 'package:flutter_task/controllers/user_preferences.dart';
 import 'package:flutter_task/views/home_page.dart';
 import 'package:get/get.dart';
 import 'firebase_options.dart';
@@ -27,10 +27,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   MaterialColor colorCustom = const MaterialColor(0xFF880E4F, AppPallete.color);
 
-  @override
-  void initState() {
-    print(UserPreferences.getUsername());
-  }
+ 
 
   @override
   Widget build(BuildContext context) {

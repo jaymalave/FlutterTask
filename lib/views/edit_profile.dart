@@ -51,10 +51,31 @@ class _EditProfileState extends State<EditProfile> {
                     showDialog(
                         context: context,
                         builder: (context) => Scaffold(
+                             backgroundColor: AppPallete.bgColor,
                               body: Column(
                                 children: [
-                                  TextField(
-                                    controller: _updateDpController,
+                                  Center(
+                                    child: SizedBox(
+                                      width: 300,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextField(
+                                          controller: _updateDpController,
+                                          decoration: InputDecoration(
+                                            hintText:
+                                                "Enter address of your profile picture",
+                                            border: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                width: 10,
+                                                style: BorderStyle.solid,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                   ElevatedButton(
                                     onPressed: () {
@@ -122,12 +143,29 @@ class _EditProfileState extends State<EditProfile> {
                     showDialog(
                       context: context,
                       builder: (context) => Scaffold(
+                        backgroundColor: AppPallete.bgColor,
                         body: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: TextField(
-                                controller: _updateNameController,
+                            Center(
+                              child: SizedBox(
+                                width: 300,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TextField(
+                                    controller: _updateNameController,
+                                    decoration: InputDecoration(
+                                      hintText: "e.g Shawn Mendes",
+                                      border: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          width: 10,
+                                          style: BorderStyle.solid,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                             ElevatedButton(
@@ -194,10 +232,31 @@ class _EditProfileState extends State<EditProfile> {
                   showDialog(
                       context: context,
                       builder: (context) => Scaffold(
+                        backgroundColor: AppPallete.bgColor,
                             body: Column(
                               children: [
-                                TextField(
-                                  controller: _updateBioController,
+                                Center(
+                                  child: SizedBox(
+                                    width: 300,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: TextField(
+                                        controller: _updateBioController,
+                                        decoration: InputDecoration(
+                                          hintText:
+                                              "",
+                                          border: OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                              width: 10,
+                                              style: BorderStyle.solid,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                                 ElevatedButton(
                                   onPressed: () {

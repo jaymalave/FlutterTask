@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_task/controllers/userdata_controller.dart';
 import 'package:flutter_task/utils/colors.dart';
 import 'package:flutter_task/utils/constants.dart';
-import 'package:flutter_task/utils/user_preferences.dart';
+import 'package:flutter_task/controllers/user_preferences.dart';
 import 'package:flutter_task/views/edit_profile.dart';
 import 'package:flutter_task/views/home.dart';
 import 'package:flutter_task/views/profile_setup.dart';

@@ -6,7 +6,7 @@ import 'package:flutter_task/controllers/userdata_controller.dart';
 import 'package:flutter_task/models/user_model.dart';
 import 'package:flutter_task/utils/colors.dart';
 import 'package:flutter_task/utils/constants.dart';
-import 'package:flutter_task/utils/user_preferences.dart';
+import 'package:flutter_task/controllers/user_preferences.dart';
 import 'package:flutter_task/views/home_page.dart';
 import 'package:get/get.dart';
 import 'package:toast/toast.dart';
@@ -64,7 +64,7 @@ class _DetailSetupState extends State<DetailSetup> {
                       ),
                     ),
                     SizedBox(
-                      width: 300,
+                      width: MediaQuery.of(context).size.width * 0.75,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextField(
@@ -102,7 +102,7 @@ class _DetailSetupState extends State<DetailSetup> {
                       ),
                     ),
                     SizedBox(
-                      width: 300,
+                      width: MediaQuery.of(context).size.width * 0.75,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextField(
@@ -143,7 +143,7 @@ class _DetailSetupState extends State<DetailSetup> {
                       ),
                     ),
                     SizedBox(
-                      width: 300,
+                      width: MediaQuery.of(context).size.width * 0.75,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextField(
