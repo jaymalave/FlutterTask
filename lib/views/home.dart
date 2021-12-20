@@ -16,18 +16,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  static Map<String, String> carsDataMap = CarData.cdMap;
+  static List<String> carsData = CarData.cdList;
 
-  Map<String, String> carsData = Map.from(carsDataMap);
+  List<String> searchData = List.from(carsData);
 
-  invalidHandler() {
-    carsData = {};
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) {
-          return const NotFound();
-        });
+  onItemChanged(String value) {
+    setState(() {
+      searchData = carsData
+          .where((string) => string.toLowerCase().contains(value.toLowerCase()))
+          .toList();
+    });
   }
 
   @override
@@ -49,17 +47,7 @@ class _HomeState extends State<Home> {
               padding: const EdgeInsets.all(4.0),
               child: TextField(
                 controller: _searchController,
-                onSubmitted: (textFieldValue) {
-                  textFieldValue.isEmpty
-                      ? carsData = carsDataMap
-                      : carsData.containsValue(textFieldValue)
-                          ? carsData.removeWhere(
-                              (key, value) => value != textFieldValue)
-                          : invalidHandler();
-                  setState(() {
-                    _searchController.clear();
-                  });
-                },
+                onChanged: onItemChanged,
                 style: const TextStyle(
                   fontSize: 15.0,
                   color: Colors.black,
@@ -89,7 +77,7 @@ class _HomeState extends State<Home> {
                     childAspectRatio: 1,
                     crossAxisSpacing: 5,
                     mainAxisSpacing: 20),
-                itemCount: carsData.length,
+                itemCount: searchData.length,
                 itemBuilder: (BuildContext ctx, index) {
                   return SizedBox(
                     height: 500,
@@ -99,7 +87,7 @@ class _HomeState extends State<Home> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                CarView(name: carsData.values.elementAt(index)),
+                                CarView(name: searchData[index]),
                           ),
                         );
                       },
@@ -117,11 +105,11 @@ class _HomeState extends State<Home> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(carsData.values.elementAt(index)),
+                              Text(searchData[index]),
                               Center(
                                 child: Image(
                                   image: AssetImage(
-                                      'assets/images/${carsData.values.elementAt(index)}.png'),
+                                      'assets/images/${searchData[index]}.png'),
                                   height: 75,
                                 ),
                               ),
