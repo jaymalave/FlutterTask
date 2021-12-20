@@ -16,7 +16,7 @@ The code for this application follows MVC architecture along with GetX state man
  OTP text field is used for OTP handling in the UI
  - [shared_preferences](https://pub.dev/packages/shared_preferences)  
    Shared preferences is a package used to store the user data in local storage of the machine so as to redirect him directly to the home page when he logs in for the second and further times.
- - [glassmorphism_buttons](https://pub.dev/packages/glassmorphism_buttons)
+ - [glassmorphism_buttons](https://pub.dev/packages/glassmorphism_buttons)  
    Glassmorphism buttons is a button package which consists of frosted-glass styled buttons, this package is built and maintained by me since October 2021.
 
 ### Screenshots
