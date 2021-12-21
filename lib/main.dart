@@ -35,14 +35,19 @@ class _MyAppState extends State<MyApp> {
   //   return false;
   // }
 
-
-  MaterialColor colorCustom =
-      const MaterialColor(0xFF880E4F, AppPallete.swatchColor);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.grey),
+      theme: ThemeData(
+        primarySwatch: const MaterialColor(0xFFF05454, AppPallete.color),
+        textTheme: const TextTheme(
+          bodyText1: TextStyle(),
+          bodyText2: TextStyle(),
+        ).apply(
+          bodyColor: AppPallete.textLight,
+          displayColor: AppPallete.textLight,
+        ),
+      ),
       home: const Scaffold(body: LoginView()),
     );
   }

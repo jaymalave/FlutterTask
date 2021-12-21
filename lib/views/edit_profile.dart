@@ -51,16 +51,18 @@ class _EditProfileState extends State<EditProfile> {
                     radius: 50,
                   ),
                 ),
-                ElevatedButton(
+                OutlinedButton(
+                  style: OutlinedButton.styleFrom(primary: AppPallete.bgColor),
+                  child: const Icon(
+                    Icons.edit,
+                    color: AppPallete.textLight,
+                  ),
                   onPressed: () {
                     showDialog(
                       context: context,
                       builder: (context) => const UpdateDp(),
                     );
                   },
-                  child: const Icon(
-                    Icons.edit,
-                  ),
                 ),
               ],
             ),
@@ -72,50 +74,44 @@ class _EditProfileState extends State<EditProfile> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Card(
-                  elevation: 0,
-                  color: AppPallete.bgColor,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        "Name:",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.2,
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      "Name:",
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
+
                 // Text(userDataController.name),
-                Card(
-                  color: AppPallete.bgColor,
-                  shadowColor: Colors.black,
-                  elevation: 5,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.6,
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          userDataController.name,
-                          textAlign: TextAlign.left,
-                        ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        userDataController.name,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
                 ),
 
-                ElevatedButton(
+                OutlinedButton(
+                  style: OutlinedButton.styleFrom(primary: AppPallete.bgColor),
+                  child: const Icon(
+                    Icons.edit,
+                    color: AppPallete.textLight,
+                  ),
                   onPressed: () {
                     showDialog(
                       context: context,
                       builder: (context) => const UpdateName(),
                     );
                   },
-                  child: const Icon(
-                    Icons.edit,
-                  ),
                 ),
               ],
             ),
@@ -126,48 +122,41 @@ class _EditProfileState extends State<EditProfile> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Card(
-                color: AppPallete.bgColor,
-                elevation: 0,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.2,
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "Bio:",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.6,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Bio:",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      userDataController.bio,
+                      textAlign: TextAlign.left,
                     ),
                   ),
                 ),
               ),
-              Card(
-                color: AppPallete.bgColor,
-                shadowColor: Colors.black,
-                elevation: 5,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        userDataController.bio,
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                  ),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(primary: AppPallete.bgColor),
+                child: const Icon(
+                  Icons.edit,
+                  color: AppPallete.textLight,
                 ),
-              ),
-              ElevatedButton(
                 onPressed: () {
                   showDialog(
                     context: context,
                     builder: (context) => const UpdateBio(),
                   );
                 },
-                child: const Icon(
-                  Icons.edit,
-                ),
               ),
             ],
           ),

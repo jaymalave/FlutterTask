@@ -27,7 +27,6 @@ class _ProfilePageState extends State<ProfilePage> {
         backgroundColor: AppPallete.bgColor,
         appBar: AppBar(
           title: const Text(Constants.profileSetup),
-          backgroundColor: AppPallete.appBarColor,
         ),
         body: Column(
           children: [
@@ -54,8 +53,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 width: 300,
                 child: TextField(
                   controller: _usernameController,
+                  style: const TextStyle(color: AppPallete.textLight),
                   decoration: InputDecoration(
                     hintText: 'e.g my_username1',
+                    hintStyle: const TextStyle(fontSize: 15.0, color: Colors.white),
                     border: OutlineInputBorder(
                       borderSide: const BorderSide(
                         width: 10,

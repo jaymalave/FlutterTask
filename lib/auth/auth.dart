@@ -89,7 +89,6 @@ class _LoginViewState extends State<LoginView> {
                 backgroundColor: AppPallete.bgColor,
                 appBar: AppBar(
                   title: const Text(Constants.enterOtp),
-                  backgroundColor: AppPallete.appBarColor,
                 ),
                 body: SizedBox(
                   width: MediaQuery.of(context).size.width * 1,
@@ -97,7 +96,8 @@ class _LoginViewState extends State<LoginView> {
                   child: OTPTextField(
                     length: 6,
                     fieldWidth: 50,
-                    style: const TextStyle(fontSize: 17),
+                    
+                    style: const TextStyle(fontSize: 17, color: AppPallete.textLight),
                     textFieldAlignment: MainAxisAlignment.spaceEvenly,
                     fieldStyle: FieldStyle.underline,
                     onCompleted: (pin) async {
@@ -165,7 +165,6 @@ class _LoginViewState extends State<LoginView> {
         appBar: AppBar(
           title: const Text(Constants.loginWithOtp),
           automaticallyImplyLeading: false,
-          backgroundColor: AppPallete.appBarColor,
         ),
         body: Center(
           child: Column(
@@ -173,7 +172,7 @@ class _LoginViewState extends State<LoginView> {
               const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Center(
-                  child: Text(Constants.enterNumber),
+                  child: Text(Constants.enterNumber, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0)),
                 ),
               ),
               SizedBox(
@@ -182,6 +181,10 @@ class _LoginViewState extends State<LoginView> {
                   child: TextField(
                     controller: _phoneController,
                     keyboardType: TextInputType.phone,
+                  style: const TextStyle(
+                  fontSize: 25.0,
+                  color: AppPallete.textLight,
+                ),
                   ),
                 ),
               ),

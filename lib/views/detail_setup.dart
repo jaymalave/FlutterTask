@@ -83,7 +83,6 @@ class _DetailSetupState extends State<DetailSetup> {
           backgroundColor: AppPallete.bgColor,
           appBar: AppBar(
             title: const Text(Constants.profileSetup),
-            backgroundColor: AppPallete.appBarColor,
             automaticallyImplyLeading: false,
           ),
           body: SingleChildScrollView(
@@ -111,8 +110,11 @@ class _DetailSetupState extends State<DetailSetup> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextField(
+                          style: const TextStyle(color: AppPallete.textLight),
                           controller: _nameController,
                           decoration: InputDecoration(
+                            hintStyle: const TextStyle(
+                                fontSize: 15.0, color: Colors.white),
                             hintText: 'e.g John Doe',
                             border: OutlineInputBorder(
                               borderSide: const BorderSide(
@@ -149,10 +151,13 @@ class _DetailSetupState extends State<DetailSetup> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextField(
+                          style: const TextStyle(color: AppPallete.textLight),
                           minLines: null,
                           maxLines: 5,
                           controller: _bioController,
                           decoration: InputDecoration(
+                            hintStyle: const TextStyle(
+                                fontSize: 15.0, color: Colors.white),
                             hintText:
                                 'e.g Software Developer, Guitarist, Books Enthusiast',
                             border: OutlineInputBorder(
@@ -190,19 +195,18 @@ class _DetailSetupState extends State<DetailSetup> {
                 const SizedBox(
                   height: 10,
                 ),
-                SizedBox(
-                  height: 200,
-                  width: 300,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30.0),
+                Card(
+                  elevation: 5,
+                  color: AppPallete.bgColor,
+                  child: SizedBox(
+                    height: 200,
+                    width: 200,
                     child: _imageFile != null
-                        ? Image.file(_imageFile!)
+                        ? SizedBox(child: Image.file(_imageFile!))
                         : ElevatedButton(
-                            child: const Icon(
-                              Icons.add_a_photo,
-                              color: Colors.black,
-                              size: 50,
-                            ),
+                            style: ElevatedButton.styleFrom(
+                                primary: AppPallete.bgColor),
+                            child: const Icon(Icons.camera_alt_rounded),
                             onPressed: pickImage,
                           ),
                   ),

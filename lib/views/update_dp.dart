@@ -3,6 +3,7 @@ import 'dart:io' as io;
 import 'package:flutter/material.dart';
 import 'package:flutter_task/controllers/edit_data_controller.dart';
 import 'package:flutter_task/utils/colors.dart';
+import 'package:flutter_task/views/home_page.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
@@ -22,7 +23,7 @@ class _UpdateDpState extends State<UpdateDp> {
   @override
   Widget build(BuildContext context) {
     var updatedDpUrl;
-    
+
     final picker = ImagePicker();
     var url;
     Future pickImage() async {
@@ -59,35 +60,51 @@ class _UpdateDpState extends State<UpdateDp> {
 
     return Scaffold(
       backgroundColor: AppPallete.bgColor,
-      body: Column(
-        children: [
-          SizedBox(
-            height: 200,
-            width: 300,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30.0),
-              child: _imageFile != null
-                  ? Image.file(_imageFile!)
-                  : ElevatedButton(
-                      child: const Icon(
-                        Icons.add_a_photo,
-                        color: Colors.black,
-                        size: 50,
-                      ),
-                      onPressed: pickImage,
-                    ),
+      appBar: AppBar(
+          title: const Text(
+            "Update Dp",
+            style: TextStyle(
+              color: AppPallete.textLight,
             ),
           ),
-          ElevatedButton(
-            onPressed: () async {
-              await uploadImageToFirebase(context);
-              editdataController.editDp(updatedDpUrl);
-              Navigator.pop(context);
-              setState(() {});
-            },
-            child: const Text("Update Dp"),
-          ),
-        ],
+          centerTitle: true),
+      body: Center(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                elevation: 15,
+                color: AppPallete.bgColor,
+                child: SizedBox(
+                  height: 200,
+                  width: 200,
+                  child: _imageFile != null
+                      ? SizedBox(child: Image.file(_imageFile!))
+                      : ElevatedButton(
+                          style:
+                              ElevatedButton.styleFrom(primary: AppPallete.bgColor),
+                          child: const Icon(Icons.camera_alt_rounded),
+                          onPressed: pickImage,
+                        ),
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await uploadImageToFirebase(context);
+                editdataController.editDp(updatedDpUrl);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomePage(),
+                  ),
+                );
+              },
+              child: const Text("Update Dp"),
+            ),
+          ],
+        ),
       ),
     );
   }

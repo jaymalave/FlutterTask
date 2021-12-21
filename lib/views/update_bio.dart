@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task/controllers/edit_data_controller.dart';
 import 'package:flutter_task/utils/colors.dart';
+import 'package:flutter_task/views/home_page.dart';
+import 'package:flutter_task/views/profile_view.dart';
 import 'package:get/get.dart';
 
 class UpdateBio extends StatefulWidget {
@@ -18,6 +20,7 @@ class _UpdateBioState extends State<UpdateBio> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text("Update bio"), centerTitle: true),
       backgroundColor: AppPallete.bgColor,
       body: Column(
         children: [
@@ -27,6 +30,10 @@ class _UpdateBioState extends State<UpdateBio> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
+                  style: const TextStyle(
+                    fontSize: 15.0,
+                    color: AppPallete.textLight,
+                  ),
                   controller: _updateBioController,
                   decoration: InputDecoration(
                     hintText: "",
@@ -45,8 +52,12 @@ class _UpdateBioState extends State<UpdateBio> {
           ElevatedButton(
             onPressed: () {
               editdataController.editBio(_updateBioController.text);
-              Navigator.pop(context);
-              setState(() {});
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HomePage(),
+                ),
+              );
             },
             child: const Text("Update Bio"),
           ),

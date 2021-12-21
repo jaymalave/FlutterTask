@@ -50,16 +50,17 @@ class _HomeState extends State<Home> {
                 onChanged: onItemChanged,
                 style: const TextStyle(
                   fontSize: 15.0,
-                  color: Colors.black,
+                  color: AppPallete.textLight,
                 ),
                 decoration: InputDecoration(
                   contentPadding:
                       const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                  prefixIcon: const Icon(Icons.search),
+                  prefixIcon: const Icon(Icons.search, color: AppPallete.textLight,),
                   hintText: "Search a Car",
+                    hintStyle: const TextStyle(fontSize: 15.0, color: Colors.white),
                   border: OutlineInputBorder(
                     borderSide:
-                        const BorderSide(color: Colors.white70, width: 1.0),
+                        const BorderSide(color: Colors.white70, width: 0.2),
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                 ),
@@ -92,7 +93,7 @@ class _HomeState extends State<Home> {
                         );
                       },
                       child: Card(
-                        color: Colors.blueGrey[400],
+                        color: AppPallete.bgColor,
                         shadowColor: Colors.black,
                         elevation: 10,
                         shape: const RoundedRectangleBorder(

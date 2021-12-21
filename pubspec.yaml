@@ -82,6 +82,7 @@ flutter:
     - assets/images/Porsche.png
     - assets/images/Jaguar.png
     - assets/images/RollsRoyce.png
+    - assets/images/no_dp.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

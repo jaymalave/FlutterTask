@@ -20,7 +20,6 @@ class ProfileView extends StatefulWidget {
 class _ProfileViewState extends State<ProfileView> {
   String imageName = '/image_picker8062803527564014121.jpg';
   final userDataController = Get.put(UserDataController());
-  
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,7 @@ class _ProfileViewState extends State<ProfileView> {
           const SizedBox(
             height: 30,
           ),
-           Center(
+          Center(
             child: CircleAvatar(
               backgroundImage: NetworkImage(userDataController.dp),
               radius: 50,

@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         backgroundColor: AppPallete.bgColor,
         bottomNavigationBar: FlashyTabBar(
-          backgroundColor: AppPallete.appBarColor,
+          backgroundColor: AppPallete.color[900],
           selectedIndex: _currentIndex,
           showElevation: true,
           onItemSelected: (index) => setState(() {
@@ -45,27 +45,27 @@ class _HomePageState extends State<HomePage> {
             FlashyTabBarItem(
               icon: const Icon(
                 Icons.home_filled,
-                color: AppPallete.textLight,
+                color: AppPallete.textDark,
               ),
               title: const Text(Constants.home,
-                  style: TextStyle(color: AppPallete.textLight)),
+                  style: TextStyle(color: AppPallete.textDark)),
             ),
             FlashyTabBarItem(
               icon: const Icon(
                 Icons.edit_outlined,
-                color: AppPallete.textLight,
+                color: AppPallete.textDark,
               ),
               title: const Text(Constants.editProfile,
-                  style: TextStyle(color: AppPallete.textLight)),
+                  style: TextStyle(color: AppPallete.textDark,)),
             ),
             FlashyTabBarItem(
               icon: const Icon(
                 Icons.account_circle,
-                color: AppPallete.textLight,
+                color: AppPallete.textDark,
               ),
               title: const Text(
                 Constants.profile,
-                style: TextStyle(color: AppPallete.textLight),
+                style: TextStyle(color: AppPallete.textDark,),
               ),
             ),
           ],
