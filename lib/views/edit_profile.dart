@@ -19,6 +19,11 @@ class _EditProfileState extends State<EditProfile> {
   final userDataController = Get.put(UserDataController());
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [

@@ -44,7 +44,6 @@ class _UpdateNameState extends State<UpdateName> {
             onPressed: () {
               editdataController.editName(_updateNameController.text);
               Navigator.pop(context);
-              setState(() {});
             },
             child: const Text("Update name"),
           ),

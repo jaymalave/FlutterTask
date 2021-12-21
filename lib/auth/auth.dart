@@ -11,6 +11,7 @@ import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 
 class LoginView extends StatefulWidget {
@@ -26,6 +27,22 @@ class _LoginViewState extends State<LoginView> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   CollectionReference users = FirebaseFirestore.instance.collection('Users');
   final userDataController = Get.put(UserDataController());
+
+  void initState() {
+    super.initState();
+    checkIfLoggedIn();
+  }
+
+  static var phone;
+  void checkIfLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    phone = prefs.getString('phone');
+    print(phone);
+    if (phone != null) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const HomePage()));
+    }
+  }
 
   void loginUser(String phoneNo) async {
     FirebaseAuth auth = FirebaseAuth.instance;
@@ -57,7 +74,7 @@ class _LoginViewState extends State<LoginView> {
                 backgroundColor: AppPallete.bgColor,
                 appBar: AppBar(
                   title: const Text(Constants.enterOtp),
-                  backgroundColor: AppPallete.color[900],
+                  backgroundColor: AppPallete.appBarColor,
                 ),
                 body: SizedBox(
                   width: MediaQuery.of(context).size.width * 1,
@@ -133,7 +150,7 @@ class _LoginViewState extends State<LoginView> {
         appBar: AppBar(
           title: const Text(Constants.loginWithOtp),
           automaticallyImplyLeading: false,
-          backgroundColor: AppPallete.color[900],
+          backgroundColor: AppPallete.appBarColor,
         ),
         body: Center(
           child: Column(

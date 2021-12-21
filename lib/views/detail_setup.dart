@@ -8,9 +8,9 @@ import 'package:flutter_task/controllers/userdata_controller.dart';
 import 'package:flutter_task/models/user_model.dart';
 import 'package:flutter_task/utils/colors.dart';
 import 'package:flutter_task/utils/constants.dart';
-import 'package:flutter_task/controllers/user_preferences.dart';
 import 'package:flutter_task/views/home_page.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
@@ -51,7 +51,6 @@ class _DetailSetupState extends State<DetailSetup> {
       setState(() {
         _imageFile = File(pickedFile!.path);
       });
-      
     }
 
     Future uploadImageToFirebase(BuildContext context) async {
@@ -84,7 +83,7 @@ class _DetailSetupState extends State<DetailSetup> {
           backgroundColor: AppPallete.bgColor,
           appBar: AppBar(
             title: const Text(Constants.profileSetup),
-            backgroundColor: AppPallete.color[900],
+            backgroundColor: AppPallete.appBarColor,
             automaticallyImplyLeading: false,
           ),
           body: SingleChildScrollView(
@@ -201,14 +200,13 @@ class _DetailSetupState extends State<DetailSetup> {
                         : ElevatedButton(
                             child: const Icon(
                               Icons.add_a_photo,
-                              color: Colors.blue,
+                              color: Colors.black,
                               size: 50,
                             ),
                             onPressed: pickImage,
                           ),
                   ),
                 ),
-                
                 ElevatedButton(
                   onPressed: () async {
                     await uploadImageToFirebase(context);
@@ -221,7 +219,9 @@ class _DetailSetupState extends State<DetailSetup> {
                       token: userToken,
                     );
                     addDataController.addUser(userObj);
-                    
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    prefs.setString('phone', userObj.phone);
                     Navigator.push(
                       context,
                       MaterialPageRoute(

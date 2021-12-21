@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_task/controllers/userdata_controller.dart';
 import 'package:flutter_task/utils/colors.dart';
 import 'package:flutter_task/utils/constants.dart';
-import 'package:flutter_task/controllers/user_preferences.dart';
 import 'package:flutter_task/views/edit_profile.dart';
 import 'package:flutter_task/views/home.dart';
 import 'package:flutter_task/views/profile_setup.dart';
@@ -21,10 +20,8 @@ class _HomePageState extends State<HomePage> {
   final userDataController = Get.put(UserDataController());
   int _currentIndex = 0;
 
-  // @override
-  // void initState() {
-  //   UserPreferences.setFromPreferred();
-  // }
+   
+  
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +35,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         backgroundColor: AppPallete.bgColor,
         bottomNavigationBar: FlashyTabBar(
-          backgroundColor: AppPallete.color[900],
+          backgroundColor: AppPallete.appBarColor,
           selectedIndex: _currentIndex,
           showElevation: true,
           onItemSelected: (index) => setState(() {
