@@ -36,9 +36,24 @@ class _LoginViewState extends State<LoginView> {
   static var phone;
   void checkIfLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    Map<String, dynamic> data;
     phone = prefs.getString('phone');
     print(phone);
     if (phone != null) {
+      FirebaseFirestore.instance
+          .collection('users')
+          .where('phone', isEqualTo: phone)
+          .get()
+          .then((QuerySnapshot<Map<String, dynamic>> doc) => {
+                data = doc.docs.first.data(),
+                userDataController.setUserState(
+                  data['name'],
+                  data['username'],
+                  data['phone'],
+                  data['bio'],
+                  data['dp'],
+                ),
+              });
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const HomePage()));
     }
