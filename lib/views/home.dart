@@ -49,7 +49,7 @@ class _HomeState extends State<Home> {
                 controller: _searchController,
                 onChanged: onItemChanged,
                 style: const TextStyle(
-                  fontSize: 15.0,
+                  fontSize: 20.0,
                   color: AppPallete.textLight,
                 ),
                 decoration: InputDecoration(
@@ -57,7 +57,7 @@ class _HomeState extends State<Home> {
                       const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                   prefixIcon: const Icon(Icons.search, color: AppPallete.textLight,),
                   hintText: "Search a Car",
-                    hintStyle: const TextStyle(fontSize: 15.0, color: Colors.white),
+                    hintStyle: const TextStyle(fontSize: 20.0, color: Colors.white),
                   border: OutlineInputBorder(
                     borderSide:
                         const BorderSide(color: Colors.white70, width: 0.2),
@@ -74,7 +74,7 @@ class _HomeState extends State<Home> {
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 350,
+                    maxCrossAxisExtent: 200,
                     childAspectRatio: 1,
                     crossAxisSpacing: 5,
                     mainAxisSpacing: 20),
@@ -106,7 +106,7 @@ class _HomeState extends State<Home> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(searchData[index]),
+                              Text(searchData[index], style: TextStyle(fontSize: 20,)),
                               Center(
                                 child: Image(
                                   image: AssetImage(

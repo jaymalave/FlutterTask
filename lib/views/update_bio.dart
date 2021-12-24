@@ -36,11 +36,13 @@ class _UpdateBioState extends State<UpdateBio> {
                   ),
                   controller: _updateBioController,
                   decoration: InputDecoration(
-                    hintText: "",
+                    hintText: "Enter bio here",
+                    hintStyle: const TextStyle(fontSize: 20.0, color: Colors.white),
                     border: OutlineInputBorder(
                       borderSide: const BorderSide(
-                        width: 10,
+                        width: 20,
                         style: BorderStyle.solid,
+                        color: AppPallete.textLight,
                       ),
                       borderRadius: BorderRadius.circular(5.0),
                     ),

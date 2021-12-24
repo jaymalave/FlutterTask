@@ -17,6 +17,7 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   final userDataController = Get.put(UserDataController());
+  final double circleRadius = 120.0;
 
   @override
   void initState() {
@@ -25,143 +26,250 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 20,
-        ),
-        const Center(
-          child: Text(
-            Constants.editProfileHead,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Center(
-          child: SizedBox(
-            width: MediaQuery.of(context).size.height * 0.4,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(userDataController.dp),
-                    radius: 50,
+    return SingleChildScrollView(
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.8,
+        width: double.infinity,
+        color: AppPallete.bgColor,
+        child: Stack(children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: circleRadius / 2.0,
                   ),
-                ),
-                OutlinedButton(
-                  style: OutlinedButton.styleFrom(primary: AppPallete.bgColor),
-                  child: const Icon(
-                    Icons.edit,
-                    color: AppPallete.textLight,
-                  ),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => const UpdateDp(),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-        Center(
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width * 1,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      "Name:",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
 
-                // Text(userDataController.name),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  child: Align(
-                    alignment: Alignment.center,
+                  ///here we create space for the circle avatar to get ut of the box
+                  child: Container(
+                    height: 700.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      color: AppPallete.bgColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 8.0,
+                          offset: Offset(0.0, 5.0),
+                        ),
+                      ],
+                    ),
+                    width: double.infinity,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        userDataController.name,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
+                        padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              height: circleRadius / 2,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  userDataController.name,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 34.0),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
+                                      primary: AppPallete.bgColor),
+                                  child: const Icon(
+                                    Icons.edit,
+                                    color: AppPallete.textLight,
+                                  ),
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => const UpdateName(),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 30.0,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 32.0),
+                              child: SizedBox(
+                                height: 300,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: <Widget>[
+                                    Column(
+                                      children: <Widget>[
+                                        const Text(
+                                          'Username',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            userDataController.username,
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                                fontSize: 20.0, fontFamily: ''),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        const Text(
+                                          "Phone",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            userDataController.phone,
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                                fontSize: 20.0, fontFamily: ''),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Center(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              const Text(
+                                                'Bio',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(width: 20),
+                                              OutlinedButton(
+                                                style: OutlinedButton.styleFrom(
+                                                    primary:
+                                                        AppPallete.bgColor),
+                                                child: const Icon(
+                                                  Icons.edit,
+                                                  color: AppPallete.textLight,
+                                                ),
+                                                onPressed: () {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) =>
+                                                        const UpdateBio(),
+                                                  );
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            userDataController.bio,
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                              fontSize: 20.0,
+                                              fontFamily: '',
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
                   ),
                 ),
 
-                OutlinedButton(
-                  style: OutlinedButton.styleFrom(primary: AppPallete.bgColor),
-                  child: const Icon(
-                    Icons.edit,
-                    color: AppPallete.textLight,
+                ///Image Avatar
+                Container(
+                  width: circleRadius,
+                  height: circleRadius,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.transparent,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 1.0,
+                        offset: Offset(0.0, 0.0),
+                      ),
+                    ],
                   ),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => const UpdateName(),
-                    );
-                  },
+                  child: Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: Center(
+                          child: CircleAvatar(
+                            backgroundImage:
+                                NetworkImage(userDataController.dp),
+                            radius: 50,
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                              primary: AppPallete.bgColor),
+                          child: const Icon(
+                            Icons.edit,
+                            color: AppPallete.textDark,
+                          ),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => const UpdateDp(),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-        ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 1,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.2,
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    "Bio:",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.6,
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      userDataController.bio,
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                ),
-              ),
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(primary: AppPallete.bgColor),
-                child: const Icon(
-                  Icons.edit,
-                  color: AppPallete.textLight,
-                ),
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => const UpdateBio(),
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-      ],
+        ]),
+      ),
     );
   }
 }
+
+
+              // OutlinedButton(
+              //   style: OutlinedButton.styleFrom(primary: AppPallete.bgColor),
+              //   child: const Icon(
+              //     Icons.edit,
+              //     color: AppPallete.textLight,
+              //   ),
+              //   onPressed: () {
+              //     showDialog(
+              //       context: context,
+              //       builder: (context) => const UpdateBio(),
+              //     );
+              //   },
+              // ),

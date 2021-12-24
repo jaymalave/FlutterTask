@@ -20,84 +20,173 @@ class ProfileView extends StatefulWidget {
 class _ProfileViewState extends State<ProfileView> {
   String imageName = '/image_picker8062803527564014121.jpg';
   final userDataController = Get.put(UserDataController());
+  final double circleRadius = 120.0;
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => false,
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 30,
-          ),
-          const Center(
-              child: Text(
-            Constants.profileHead,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          )),
-          const SizedBox(
-            height: 30,
-          ),
-          Center(
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(userDataController.dp),
-              radius: 50,
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("Name:",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    child: Text(userDataController.name)),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("Username:",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  child: Text(userDataController.username),
+      child: Container(
+        height: double.infinity,
+        width: double.infinity,
+        color: AppPallete.bgColor,
+        child: Stack(children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: circleRadius / 2.0,
+                  ),
+
+                  ///here we create space for the circle avatar to get ut of the box
+                  child: Container(
+                    height: 700.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      color: AppPallete.bgColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 8.0,
+                          offset: Offset(0.0, 5.0),
+                        ),
+                      ],
+                    ),
+                    width: double.infinity,
+                    child: Padding(
+                        padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              height: circleRadius / 2,
+                            ),
+                            Text(
+                              userDataController.name,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 34.0),
+                            ),
+                            const SizedBox(
+                              height: 30.0,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 32.0),
+                              child: SizedBox(
+                                height: 300,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: <Widget>[
+                                    Column(
+                                      children: <Widget>[
+                                        const Text(
+                                          'Username',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                            
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            userDataController.username,
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                                fontSize: 20.0,
+                                                fontFamily: ''),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        const Text(
+                                          "Phone",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 20.0,
+                                              fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            userDataController.phone,
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                                fontSize: 20.0,
+                                                fontFamily: ''),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        const Text(
+                                          'Bio',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 20.0,
+                                              fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            userDataController.bio,
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                                fontSize: 20.0,
+                                                fontFamily: '',
+                                                
+                                                ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
+                  ),
+                ),
+
+                ///Image Avatar
+                Container(
+                  width: circleRadius,
+                  height: circleRadius,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.transparent,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 1.0,
+                        offset: Offset(0.0, 0.0),
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: Center(
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(userDataController.dp),
+                        radius: 50,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("Bio:",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  child: Text(userDataController.bio),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-        ],
+        ]),
       ),
     );
   }

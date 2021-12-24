@@ -1,0 +1,121 @@
+package com.company;
+
+import java.util.Scanner;
+
+class Student {
+    private int stud_id;
+    private String name;
+    private float avg_marks;
+
+    public int getStud_id() {
+        return this.stud_id;
+    }
+
+    public float getAvg_marks() {
+        return this.avg_marks;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setAvg_marks(float avg_marks) {
+        this.avg_marks = avg_marks;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStud_id(int stud_id) {
+        this.stud_id = stud_id;
+    }
+}
+
+public class Main {
+
+    static boolean delStudent(Student[] students, int studentID) {
+        boolean flag = false;
+        for (int i = 0; i < students.length; ++i) {
+            if (students[i] != null) {
+                if (studentID == students[i].getStud_id()) {
+                    students[i] = null;
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        return flag;
+    }
+
+    static void addStudent(Student[] students, int studentID, String name, float avgMarks) {
+        for (Student student : students) {
+            if (student != null) {
+                student.setAvg_marks(avgMarks);
+                student.setStud_id(studentID);
+                student.setName(name);
+            }
+        }
+    }
+
+    static void displayStudents(Student[] students) {
+        for (Student student : students) {
+            if (student != null) {
+                System.out.println(student.getStud_id() + ". " + student.getName() + " -- " + student.getAvg_marks());
+            }
+        }
+        System.out.println("\n");
+    }
+
+    public static void main(String[] args) {
+        int current_size = 0;
+        Scanner s = new Scanner(System.in);
+        System.out.print("Enter number of students: ");
+        int n = s.nextInt();
+        Student[] students = new Student[n];
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Enter an option:");
+            System.out.println("1. Add student according to decreasing order of their marks");
+            System.out.println("2. Delete any student data based on their student ID");
+            System.out.println("3. Display student data in decreasing order of their marks");
+            System.out.println("Any other option to exit");
+            int option = s.nextInt();
+            switch (option) {
+                case 1: {
+                    if (current_size < students.length) {
+                        System.out.print("Enter ID to add: ");
+                        int id = s.nextInt();
+                        System.out.print("Enter name to add: ");
+                        String name = s.next();
+                        System.out.print("Enter avg marks to add: ");
+                        float avg = s.nextFloat();
+                        addStudent(students, id, name, avg);
+                        current_size++;
+                    } else {
+                        System.out.println("Limit exceeded");
+                    }
+                    break;
+                }
+                case 2: {
+                    System.out.print("Enter ID to delete: ");
+                    int id = s.nextInt();
+                    boolean deleted = delStudent(students, id);
+                    if (deleted) {
+                        System.out.println("Student deleted");
+                        current_size--;
+                    } else {
+                        System.out.println("Student not found");
+                    }
+                    break;
+                }
+                case 3: {
+                    displayStudents(students);
+                    break;
+                }
+                default:
+                    flag = false;
+            }
+        }
+    }
+}

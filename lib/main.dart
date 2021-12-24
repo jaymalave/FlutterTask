@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: const MaterialColor(0xFFF05454, AppPallete.color),
+        primarySwatch: const MaterialColor(0xFF548CA8, AppPallete.color),
         textTheme: const TextTheme(
           bodyText1: TextStyle(),
           bodyText2: TextStyle(),

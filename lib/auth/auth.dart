@@ -161,7 +161,7 @@ class _LoginViewState extends State<LoginView> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        backgroundColor: AppPallete.bgColor,
+        backgroundColor: Colors.black87,
         appBar: AppBar(
           title: const Text(Constants.loginWithOtp),
           automaticallyImplyLeading: false,
